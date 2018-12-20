@@ -1,0 +1,17 @@
+obj/*
+bin/*
+res*.txt
+*/*.swp
+*/*.swo
+*/*.orig
+*.swp
+*.swo
+*.orig
+build
+doxygen
+.tags
+.tags_sorted_by_file
+Visualizer/node_modules
+Visualizer/static/*.json
+capnp/*.h
+capnp/*.c++
