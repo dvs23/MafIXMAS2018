@@ -10,7 +10,7 @@ file(GLOB SOURCES "src/*.cpp")
 
 #-fexceptions -Wnon-virtual-dtor -Wshadow -Winit-self -Wredundant-decls -Wcast-align -Wfloat-equal -Wunreachable-code -Wmissing-include-dirs -Wswitch-enum -Wswitch-default -Wzero-as-null-pointer-constant -Wmain -Wextra -Wall
 
-set(CMAKE_CXX_FLAGS_RELEASE "-Wall -g -O3 -std=c++17 -fno-strict-aliasing")
+set(CMAKE_CXX_FLAGS_RELEASE "-Wall -g -O3 -std=c++17 -ftree-vectorize -ftree-vectorizer-verbose=2")
 set(CMAKE_CXX_FLAGS_DEBUG "-Wall  -std=c++17 -g -fno-strict-aliasing")
 message("CMAKE_BUILD_TYPE is ${CMAKE_BUILD_TYPE}")
  

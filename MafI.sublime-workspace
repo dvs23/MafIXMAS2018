@@ -1,1 +1,1148 @@
-{}
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"MEssa",
+				"MessageSize\tMessageSize"
+			],
+			[
+				"st",
+				"storeWortStr\tstd::string storeWortStr(WortPtr w)"
+			],
+			[
+				"se",
+				"setWord\tvoid Builder::setWord(::capnp::Data::Reader value)"
+			],
+			[
+				"restoreWortPtr",
+				"restoreWortPtrStr\tWortPtr restoreWortPtrStr(const std::string &data)"
+			],
+			[
+				"res",
+				"restoreWortStr\tWort restoreWortStr(const std::string &data)"
+			],
+			[
+				"un",
+				"unlock_shared\tvoid unlock_shared()"
+			],
+			[
+				"blo",
+				"block_cache\tCache * block_cache"
+			],
+			[
+				"restor",
+				"restoreWortPtrStr\tWortPtr restoreWortPtrStr(const std::string &data)"
+			],
+			[
+				"level",
+				"levelDBPath\tstd::string levelDBPath"
+			],
+			[
+				"b",
+				"begin\tconst char * begin()"
+			],
+			[
+				"as",
+				"asChars\tArrayPtr<PropagateConst<const unsigned char, char> > ArrayPtr<const unsigned char>::asChars() const"
+			],
+			[
+				"Arr",
+				"ArrayPtr\tArrayPtr<typename T>"
+			],
+			[
+				"restoreWo",
+				"restoreWortPtrStr\tWortPtr restoreWortPtrStr(const std::string &data)"
+			],
+			[
+				"Wor",
+				"WortServer\tWortServer"
+			],
+			[
+				"w",
+				"WID\tunsigned int WID"
+			],
+			[
+				"g",
+				"getId\t::uint32_t getId() const"
+			],
+			[
+				"WortServer",
+				"WortServerImpl\tWortServerImpl"
+			],
+			[
+				"rest",
+				"restoreWortStr\tvoid restoreWortStr(const std::string &data, Wort &w)"
+			],
+			[
+				"set",
+				"setW\tvoid setW(::capnp::Text::Reader value)"
+			],
+			[
+				"dictE",
+				"dictEntryList"
+			],
+			[
+				"dict",
+				"dictEntry"
+			],
+			[
+				"getOft",
+				"getOftInDirV\t::WortData::DataList::Reader getOftInDirV() const"
+			],
+			[
+				"getO",
+				"getOftInSatz\t::WortData::DataList::Reader getOftInSatz() const"
+			],
+			[
+				"get",
+				"getW\t::capnp::Text::Reader getW() const"
+			],
+			[
+				"ini",
+				"initOftInSatz\t::WortData::DataList::Builder initOftInSatz()"
+			],
+			[
+				"oft",
+				"oftInSatz\tWort::hashmap<unsigned int, unsigned int> oftInSatz"
+			],
+			[
+				"inc",
+				"include"
+			],
+			[
+				"AttrD",
+				"AttrDataList"
+			],
+			[
+				"Data",
+				"DataList"
+			],
+			[
+				"datra",
+				"dataWords"
+			],
+			[
+				"wor",
+				"wortRestore"
+			],
+			[
+				"add",
+				"addAll\tvoid addAll(Iterator start, Iterator end)"
+			],
+			[
+				"two",
+				"twort\tWortData::Reader twort"
+			],
+			[
+				"beg",
+				"begin\tconst ArrayPtr<const word> * begin()"
+			],
+			[
+				"slaveLi",
+				"slaveListGlob"
+			],
+			[
+				"sha",
+				"lock_shared\tvoid lock_shared()"
+			],
+			[
+				"slave",
+				"slaveListGlob\tstd::map<std::string, std::shared_ptr<slaveDataStore> > & slaveListGlob"
+			],
+			[
+				"fet",
+				"fetch_sub\t__int_type __atomic_base<unsigned long long>::fetch_sub(__int_type __i)"
+			],
+			[
+				"_sla",
+				"_slaveListGlobLock\tstd::shared_timed_mutex & _slaveListGlobLock"
+			],
+			[
+				"slaveLis",
+				"slaveListLoc\tslaveListLoc(args)"
+			],
+			[
+				"tot",
+				"totalJobNum\tunsigned int totalJobNum"
+			],
+			[
+				"prom",
+				"promList\tVector<Promise<vector<pair<unsigned int, double>, allocator<pair<unsigned int, double> > > > > promList"
+			],
+			[
+				"new",
+				"newPromiseAndFulfiller\tPromiseFulfillerPair<U> newPromiseAndFulfiller<typename U>()"
+			],
+			[
+				"Compa",
+				"CompareAdapter"
+			],
+			[
+				"Com",
+				"CompareAdapter"
+			],
+			[
+				"woSi",
+				"woSizeMutex\tstd::mutex & woSizeMutex"
+			],
+			[
+				"_woS",
+				"_woSizeMutex\tstd::mutex & _woSizeMutex"
+			],
+			[
+				"tota",
+				"totalJobNum\tunsigned int totalJobNum"
+			],
+			[
+				"job",
+				"jobParts\tReader jobParts"
+			],
+			[
+				"jo",
+				"jobParts\tBuilder jobParts"
+			],
+			[
+				"s",
+				"startID\tunsigned int startID"
+			],
+			[
+				"jobPa",
+				"jobPartsList\tBuilder jobPartsList"
+			],
+			[
+				"j",
+				"getJobs\t::capnp::List< ::CompareNetwork::JobPartList::JobPart::Job, ::capnp::Kind::STRUCT>::Builder getJobs()"
+			],
+			[
+				"jobVe",
+				"jobVec\tstd::vector<jobDatList> jobVec"
+			],
+			[
+				"jobDat",
+				"jobDatList\tjobDatList"
+			],
+			[
+				"reser",
+				"reservedSize"
+			],
+			[
+				"in",
+				"insert\tstd::pair<iterator, bool> insert(const value_type &__x)"
+			],
+			[
+				"Co",
+				"CompareNetwork"
+			],
+			[
+				"er",
+				"erase\tsize_type erase(const key_type &__x)"
+			],
+			[
+				"KJ_",
+				"KJ_FAIL_ASSERT\tKJ_FAIL_ASSERT"
+			],
+			[
+				"__",
+				"__FILE__\t__FILE__"
+			],
+			[
+				"KJ",
+				"KJ_EXCEPTION\tKJ_EXCEPTION(type, ...)"
+			],
+			[
+				"restoreW",
+				"restoreWortPtr\tWortPtr restoreWortPtr(unsigned int ID, ConcurrentLevelDB &db, bool fetchGlw, unsigned int greaterThan)"
+			],
+			[
+				"lastA",
+				"lastAccessLoc\tsize_t lastAccessLoc"
+			],
+			[
+				"last",
+				"lastAccessLoc\tsize_t lastAccessLoc"
+			],
+			[
+				"useKe",
+				"useKey\tvoid useKey(unsigned int k, google::sparse_hash_map<unsigned int, size_t>::iterator key)"
+			],
+			[
+				"com",
+				"compareJob\tint compareJob()"
+			],
+			[
+				"getW",
+				"getWid1\t::uint32_t getWid1() const"
+			],
+			[
+				"Jo",
+				"JobList\tJobList"
+			],
+			[
+				"re",
+				"releaseAsArray\tArray<Promise<void> > releaseAsArray()"
+			],
+			[
+				"_s",
+				"_slaveQueuesLock"
+			],
+			[
+				"eva",
+				"evalLater\tPromiseForResult<Func, void> evalLater(Func &&func)"
+			],
+			[
+				"server",
+				"_serverWaitScope"
+			],
+			[
+				"leve",
+				"leveldbPath\tstd::string leveldbPath"
+			],
+			[
+				"ex",
+				"Exception"
+			],
+			[
+				"per",
+				"perfInd"
+			],
+			[
+				"size",
+				"sizePack\tconst double sizePack"
+			],
+			[
+				"Gr",
+				"GroupSlave2"
+			],
+			[
+				"_WI",
+				"_WID2"
+			],
+			[
+				"comp",
+				"compJob\tcompJob"
+			],
+			[
+				"Wort",
+				"WortLRU"
+			],
+			[
+				"slae",
+				"slaveList\tint slaveList"
+			],
+			[
+				"oftIn",
+				"oftInDirH\tWort::hashmap<unsigned int, unsigned int> oftInDirH"
+			],
+			[
+				"la",
+				"launch\tlaunch"
+			],
+			[
+				"getC",
+				"getStrengthColor"
+			],
+			[
+				"genTfIdf",
+				"genTfIdf\tvoid genTfIdf(google::sparse_hash_map<unsigned int, unsigned int> words, google::sparse_hash_map<unsigned int, double> &tfIdf, unsigned int totalC, unsigned int maxCT, const google::sparse_hash_map<unsigned int, unsigned int> &c)"
+			],
+			[
+				"maxCT",
+				"maxCTDate\tgoogle::sparse_hash_map<std::string, unsigned int> maxCTDate"
+			],
+			[
+				"coun",
+				"countedDate\tgoogle::sparse_hash_map<std::string, google::sparse_hash_map<unsigned int, unsigned int> > countedDate"
+			],
+			[
+				"maxC",
+				"maxCTTexts\tgoogle::sparse_hash_map<unsigned int, unsigned int> maxCTTexts"
+			],
+			[
+				"sparse",
+				"sparse_hash_map\tsparse_hash_map<class Key, class T>"
+			],
+			[
+				"alrea",
+				"EALREADY\tEALREADY"
+			],
+			[
+				"currC",
+				"currCit\tgoogle::sparse_hashtable_const_iterator<std::pair<const unsigned int, unsigned int>, unsigned int, std::tr1::hash<unsigned int>, google::sparse_hash_map<unsigned int, unsigned int, std::tr1::hash<unsigned int>, std::equal_to<unsigned int>, google::libc_allocator_with_realloc<std::pair<const unsigned int, unsigned int> > >::SelectKey, google::sparse_hash_map<unsigned int, unsigned int, std::tr1::hash<unsigned int>, std::equal_to<unsigned int>, google::libc_allocator_with_realloc<std::pair<const unsigned int, unsigned int> > >::SetKey, std::equal_to<unsigned int>, google::libc_allocator_with_realloc<std::pair<const unsigned int, unsigned int> > > currCit"
+			],
+			[
+				"genTf",
+				"genTfIdf\tvoid genTfIdf(const std::string &text, google::sparse_hash_map<unsigned int, double> &tfIdf, unsigned int totalC, ConcurrentLevelDB *db)"
+			],
+			[
+				"Conc",
+				"ConcurrentLevelDB"
+			],
+			[
+				"releva",
+				"relevantIDsT1\tstd::set<unsigned int> relevantIDsT1"
+			],
+			[
+				"rele",
+				"relevantIDsT2"
+			],
+			[
+				"relev",
+				"relevantIDsT1\tstd::set<unsigned int> relevantIDsT1"
+			],
+			[
+				"sumT",
+				"sumTfidf1\tdouble sumTfidf1"
+			],
+			[
+				"minS",
+				"minSimValue"
+			],
+			[
+				"Wr",
+				"WriteUnlock\tvoid WriteUnlock()"
+			],
+			[
+				"Re",
+				"ReadUnlock\tvoid ReadUnlock()"
+			],
+			[
+				"Wri",
+				"WriteUnlock\tvoid WriteUnlock()"
+			],
+			[
+				"y",
+				"tm_year\tint tm_year"
+			],
+			[
+				"impor",
+				"imporIDs"
+			],
+			[
+				"ad",
+				"address_v4\taddress_v4"
+			],
+			[
+				"border-radius",
+				"border-top-left-radius"
+			],
+			[
+				"rere",
+				"renderer"
+			],
+			[
+				"te",
+				"textarea\tTag"
+			],
+			[
+				"for",
+				"for\tfor (…) {…}"
+			],
+			[
+				"ha",
+				"sparse_hash_map"
+			],
+			[
+				"fir",
+				"sync_file_range\tint sync_file_range(int __fd, __off64_t __offset, __off64_t __count, unsigned int __flags)"
+			],
+			[
+				"clie",
+				"clientPort"
+			],
+			[
+				"seco",
+				"secondID"
+			],
+			[
+				"relevan",
+				"relevantIDsT2\tstd::set<unsigned int> relevantIDsT2"
+			],
+			[
+				"avgTf",
+				"avgTfidf2\tdouble avgTfidf2"
+			],
+			[
+				"anzT",
+				"anzTfidf1"
+			],
+			[
+				"try",
+				"try_dequeue\tbool try_dequeue(U &item)"
+			],
+			[
+				"retur",
+				"returnedJobs"
+			],
+			[
+				"ret",
+				"returnQ"
+			],
+			[
+				"slaveC",
+				"slaveQCounter\tGroupNetwork::shared_atomic<unsigned int> slaveQCounter"
+			],
+			[
+				"slaveQue",
+				"slaveQueue"
+			],
+			[
+				"master",
+				"masterCon"
+			],
+			[
+				"OnAcc",
+				"OnAcceptSlaves\tvoid OnAcceptSlaves(const asio::error_code &ec, std::shared_ptr<asio::ip::tcp::socket> sock)"
+			],
+			[
+				"clientA",
+				"clientServer_acceptor\tstd::shared_ptr<asio::ip::tcp::acceptor> clientServer_acceptor"
+			],
+			[
+				"err",
+				"error_code\terror_code"
+			],
+			[
+				"cli",
+				"clientThreads\tunsigned int clientThreads"
+			],
+			[
+				"sleep",
+				"sleep_for\tvoid sleep_for(const chrono::duration<_Rep, _Period> &__rtime)"
+			],
+			[
+				"stop",
+				"stopSock\tstd::atomic<bool> stopSock"
+			]
+		]
+	},
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 392.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"c",
+				"CTags: Rebuild Tags"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			],
+			[
+				"Easy",
+				"EasyClangComplete: Settings"
+			],
+			[
+				"packa",
+				"Package Control: Remove Package"
+			],
+			[
+				"subl",
+				"SublimeLinter: Lint This View"
+			],
+			[
+				"sublime",
+				"SublimeLinter: Lint This View"
+			],
+			[
+				"ctag",
+				"CTags: Rebuild Tags"
+			],
+			[
+				"CSCo",
+				"Cscope: Rebuild database"
+			],
+			[
+				"CTags",
+				"CTags: Rebuild Tags"
+			],
+			[
+				"Package Control: Ins",
+				"Package Control: Install Package"
+			],
+			[
+				"Csco",
+				"Cscope: Rebuild database"
+			],
+			[
+				"CScop",
+				"Cscope: Rebuild database"
+			],
+			[
+				"Defin",
+				"Cscope: Look up global definition"
+			],
+			[
+				"PackageRes",
+				"PackageResourceViewer: Open Resource"
+			],
+			[
+				"HMA",
+				"Ycmd: Create HMAC keys"
+			],
+			[
+				"Y",
+				"Ycmd: Restart ycmd server"
+			],
+			[
+				"ycmd",
+				"Ycmd: Restart ycmd server"
+			],
+			[
+				"safe",
+				"StringEncode: Safe HTML Entitize"
+			],
+			[
+				"ent",
+				"StringEncode: Safe HTML Entitize"
+			],
+			[
+				"enc",
+				"StringEncode: HTML Entitize"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"ena",
+				"Package Control: Enable Package"
+			]
+		],
+		"width": 497.0
+	},
+	"console":
+	{
+		"height": 510.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = 'df21e130d211cfc94d9b0905775a7c0f' + '1e3d39e33b79698005270310898eea76'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by) "
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/home/dvs23/projects/MafIXMAS2018/deb.sh",
+		"/home/dvs23/projects/General/include/WortServer.h",
+		"/home/dvs23/projects/General/src/WortServer.cpp",
+		"/home/dvs23/projects/Group/src/GroupNetwork.cpp",
+		"/home/dvs23/projects/Group/include/GroupSlave2.h",
+		"/home/dvs23/projects/General/src/Wort.cpp",
+		"/home/dvs23/projects/General/include/Wort.h",
+		"/home/dvs23/projects/General/src/WortBase.cpp",
+		"/home/dvs23/projects/General/include/WortBase.h",
+		"/home/dvs23/projects/Group/src/GroupMaster2.cpp",
+		"/home/dvs23/projects/Group/src/GroupSlave2.cpp",
+		"/home/dvs23/.config/sublime-text-3/Packages/SublimeAStyleFormatter/SublimeAStyleFormatter.sublime-settings",
+		"/home/dvs23/.config/sublime-text-3/Packages/User/SublimeAStyleFormatter.sublime-settings",
+		"/home/dvs23/projects/devStuff/home/.config/sublime-text-3/Packages/SublimeAStyleFormatter/SublimeAStyleFormatter.sublime-settings",
+		"/home/dvs23/projects/Group/CMakeLists.txt",
+		"/home/dvs23/projects/Group/capnp/GroupNetworkData.capnp",
+		"/home/dvs23/.config/sublime-text-3/Packages/Terminal/Terminal.sublime-settings",
+		"/home/dvs23/.config/sublime-text-3/Packages/User/Terminal.sublime-settings",
+		"/home/dvs23/projects/devStuff/home/.config/sublime-text-3/Packages/EasyClangComplete/messages/4.3.0.rst",
+		"/home/dvs23/projects/devStuff/home/.config/sublime-text-3/Packages/EasyClangComplete/docs/pc_readme.md",
+		"/home/dvs23/projects/devStuff/home/.config/sublime-text-3/Packages/EasyClangComplete/README.md",
+		"/home/dvs23/projects/Group/src/Group.cpp",
+		"/home/dvs23/projects/Group/include/Group.h",
+		"/home/dvs23/projects/Group/Group.sublime-project",
+		"/home/dvs23/projects/Group/src/DBSCAN.cpp",
+		"/home/dvs23/projects/Group/Visualizer/static/cytoscape-ngraph.forcelayout.js",
+		"/home/dvs23/projects/Group/Visualizer/static/news2.html",
+		"/home/dvs23/projects/Group/Visualizer/static/sigmaNews.html",
+		"/home/dvs23/projects/Group/Visualizer/.eslintrc",
+		"/home/dvs23/projects/General/include/LRUCache11.hpp",
+		"/home/dvs23/projects/General/src/ConcurrentLevelDB.cpp",
+		"/home/dvs23/projects/General/include/ConcurrentLevelDB.h",
+		"/home/dvs23/projects/General/main.cpp",
+		"/home/dvs23/projects/Group/tests/main.cpp",
+		"/home/dvs23/projects/Group/tests/TestGroup.cpp",
+		"/home/dvs23/projects/General/capnp/WortData.capnp",
+		"/home/dvs23/projects/Group/include/GroupClient2.h",
+		"/home/dvs23/projects/General/src/GroupNetwork.cpp",
+		"/home/dvs23/projects/General/src/GroupMaster2.cpp",
+		"/home/dvs23/projects/General/include/WtypeData.h",
+		"/home/dvs23/projects/bs/A0/prim_extended.c",
+		"/home/dvs23/projects/bs/A0/prim.c",
+		"/usr/include/c++/7.3.1/ext/new_allocator.h",
+		"/home/dvs23/projects/main.cpp",
+		"/usr/include/c++/7.3.1/bits/basic_string.h",
+		"/home/dvs23/projects/General/.gitignore",
+		"/home/dvs23/projects/Group/.gitignore",
+		"/home/dvs23/General/capnp/Wort.capnp.h",
+		"/home/dvs23/projects/General/capnp/Wort.capnp.h",
+		"/home/dvs23/projects/Group/src/GroupMaster.cpp",
+		"/usr/include/kj/async-inl.h",
+		"/usr/include/kj/memory.h",
+		"/usr/include/capnp/list.h",
+		"/usr/include/kj/async-prelude.h",
+		"/home/dvs23/projects/PWLiveCD/efiboot/loader/entries/archiso-x86_64-cd.conf",
+		"/home/dvs23/projects/PWLiveCD/efiboot/loader/entries/archiso-x86_64-usb.conf",
+		"/home/dvs23/projects/PWLiveCD/efiboot/loader/loader.conf",
+		"/home/dvs23/.config/sublime-text-3/Packages/EasyClangComplete/messages/4.3.0.rst",
+		"/home/dvs23/projects/Group/src/GroupClient2.cpp",
+		"/home/dvs23/projects/Group/capnp/GroupNetworkData.capnp.h",
+		"/usr/include/kj/common.h",
+		"/home/dvs23/projects/src/GroupMaster2.cpp",
+		"/usr/include/kj/async.h",
+		"/home/dvs23/projects/Group/src/GroupSlave.cpp",
+		"/home/dvs23/projects/Group/include/GroupSlave.h",
+		"/home/dvs23/projects/Group/include/GroupClient.h",
+		"/usr/include/c++/7.3.1/tuple",
+		"/home/dvs23/projects/Group/main.cpp",
+		"/home/dvs23/Downloads/google-takeout/Takeout/Maps (meine Orte)/Gespeicherte Orte.json",
+		"/home/dvs23/Downloads/google-takeout/Takeout/Profil/David Schmidt.json",
+		"/home/dvs23/Downloads/google-takeout/Takeout/Kontakte/Alle Kontakte/Alle Kontakte.vcf",
+		"/home/dvs23/Downloads/google-takeout/Takeout/Chrome/SyncSettings.json",
+		"/home/dvs23/Downloads/google-takeout/Takeout/Mail/Alle E-Mails einschließlich Spam-Nachrichten und E.mbox",
+		"/home/dvs23/projects/Group/include/GroupNetworkData.capnp",
+		"/home/dvs23/projects/Group/include/GroupNetworkData.capnp.c++",
+		"/home/dvs23/projects/Group/include/GroupNetworkData.capnp.h",
+		"/home/dvs23/projects/Group/src/GroupClient.cpp",
+		"/home/dvs23/projects/Group/include/GroupMaster.h",
+		"/home/dvs23/projects/Group/Visualizer/static/index.html",
+		"/home/dvs23/projects/Group/src/OPTICS.cpp",
+		"/home/dvs23/projects/Group/include/OPTICS.h",
+		"/srv/http/webglDOMLabels.html",
+		"/home/dvs23/ThomasMann/pg34811.txt",
+		"/home/dvs23/ThomasMann/rest/pg12108.txt",
+		"/home/dvs23/ThomasMann/rest/36766-0.txt",
+		"/home/dvs23/ThomasMann/nicht_glob.txt",
+		"/home/dvs23/ThomasMann/nicht_loc.txt",
+		"/home/dvs23/ThomasMann/sort.py",
+		"/home/dvs23/ThomasMann/35328-0.txt",
+		"/home/dvs23/ThomasMann/36766-0.txt",
+		"/home/dvs23/ThomasMann/38692-0.txt",
+		"/home/dvs23/ThomasMann/pg12053.txt",
+		"/home/dvs23/ThomasMann/pg12108.txt",
+		"/home/dvs23/ThomasMann/pg13810.txt",
+		"/home/dvs23/ThomasMann/pg23313.txt",
+		"/home/dvs23/ThomasMann/pg36028.txt",
+		"/home/dvs23/projects/Group/tests/catch/catch_reporter_tap.hpp",
+		"/home/dvs23/projects/Group/include/WortLRU.h",
+		"/home/dvs23/projects/WordCount/main.cpp",
+		"/home/dvs23/projects/WordCount/include/TextMaster.h",
+		"/home/dvs23/projects/WordCount/src/TextMaster.cpp",
+		"/home/dvs23/General/include/mysql++11/mysql++11.h",
+		"/main.cpp",
+		"/home/dvs23/projects/include/GroupMaster.h",
+		"/usr/include/mysql++/beemutex.h",
+		"/home/dvs23/projects/Group/Visualizer/index.js",
+		"/home/dvs23/projects/NewsFetch/fetchNews.py",
+		"/home/dvs23/newsServer_25_02_18.sql",
+		"/home/dvs23/projects/WordCount/src/WordCount.cpp",
+		"/home/dvs23/projects/Group/Visualizer/static/news.html",
+		"/home/dvs23/projects/General/include/SqlInsBuf.h",
+		"/home/dvs23/projects/Group/build/newsSimple.txt",
+		"/home/dvs23/projects/WordCount/src/Group.cpp",
+		"/home/dvs23/projects/General/src/GroupSlave.cpp",
+		"/home/dvs23/projects/General/include/SqlGeneral.h",
+		"/home/dvs23/Group_txt/text_double_relevant_only.txt",
+		"/mnt/nas/Dateien/herrm_natur_mensch.txt",
+		"/home/dvs23/projects/src/Group.cpp",
+		"/home/dvs23/projects/Group/insert.py",
+		"/home/dvs23/projects/General/include/LRUCache11_RWLock.hpp",
+		"/home/dvs23/top2",
+		"/usr/include/c++/7.3.0/bits/stl_function.h",
+		"/home/dvs23/projects/Group/Visualizer/GroupClient.js",
+		"/home/dvs23/projects/miniIMS/miniIMS.js",
+		"/home/dvs23/projects/Group/Visualizer/static/linke.json",
+		"/home/dvs23/Downloads/jquery-ui-1.12.1.custom/package.json",
+		"/home/dvs23/projects/NewsFetch/newsSim.sql",
+		"/home/dvs23/projects/NewsFetch/NewsFetchDB.sql"
+	],
+	"find":
+	{
+		"height": 37.0
+	},
+	"find_in_files":
+	{
+		"height": 176.0,
+		"where_history":
+		[
+			"*.cpp,*.h",
+			"-.*,-*.txt,-*.tex,-*.html,<open folders>",
+			"-.*,-*.txt,-.tex,-.html,<open folders>",
+			"-.*,-*.txt,-doxygen,<open folders>",
+			"-.*,-*.txt,<open folders>",
+			"-.*,<open folders>",
+			"",
+			"/home/dvs23/projects/Group/include,/home/dvs23/projects/Group/src",
+			"/home/dvs23/projects/Flexionen/include,/home/dvs23/projects/Flexionen/src",
+			"/home/dvs23/projects/General/include,/home/dvs23/projects/General/src",
+			"/home/dvs23/projects/WordCount/include,/home/dvs23/projects/WordCount/src",
+			"",
+			"/home/dvs23/projects/General/include,/home/dvs23/projects/General/src",
+			"/home/dvs23/projects/*/include,/home/dvs23/projects/*/src",
+			"/home/dvs23/projects/Group/include,/home/dvs23/projects/Group/src",
+			"/home/dvs23/projects/Group/include",
+			"/home/dvs23/projects/Group/src",
+			"/home/dvs23/projects/Group/include",
+			"/home/dvs23/projects/Group/src",
+			"/home/dvs23/projects/Group"
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"GroupSlave.h",
+			"WortOld",
+			"WORT",
+			"Wort::",
+			"\n#",
+			"capnp::EzRpcServer",
+			"ReaderOptions",
+			"GetDictCon",
+			"Server",
+			"MessageSize",
+			"traversalLimit",
+			"traversalLimitInWords",
+			"twopa",
+			"getDictRequest",
+			"receiveOptions",
+			"WortCli",
+			"ConcurrentLevelDB& db",
+			"static ",
+			"WortCli",
+			"WortSer",
+			"cyforcelayout",
+			"regRun",
+			"value",
+			"$(\"#sliderVal\")",
+			"warn",
+			"Bin",
+			"load",
+			"rethrow",
+			"FlatArrayMessageReader",
+			"FlatArray",
+			"FlatA",
+			"delete",
+			"delete[]",
+			"std::cout << ",
+			"std::cout << sizeof(capnp::word) << \" \" << numWords << \" \" << data.size\n() << std::endl;",
+			"std::cout << sizeof(capnp::word) << \" \" << numWords << \" \" << data.si\nze() << std::endl;",
+			"CompareAdapter",
+			"storing bas",
+			"Basi",
+			"store",
+			"restoreWortPtrBin",
+			"storeWortDB",
+			"restoreWortBin",
+			"Wort::",
+			"greaterTh",
+			"minimal",
+			"erase",
+			"CURDATE",
+			"news\"",
+			"Bla",
+			"EzRpcClient",
+			"cm->",
+			"news\"",
+			"exec",
+			"mysql",
+			"__FI",
+			"Err2",
+			"RunTheStuffAdapter",
+			"Returned$|After everything",
+			"Returned$",
+			"Sent",
+			"Returned",
+			"returned2",
+			"returned",
+			"retur",
+			"returned",
+			"news\"",
+			"woSize",
+			"news\"",
+			"GroupClient",
+			"GroupClient2",
+			"GroupClien",
+			"nullp",
+			"Err",
+			"cout",
+			"WortCom",
+			"setJob",
+			"getJobID",
+			"max",
+			"unsigned int k",
+			"wos",
+			"getWid2()",
+			"getWid1()",
+			"nullp",
+			"then",
+			"exception",
+			"exce",
+			"getDes",
+			"then",
+			"contex",
+			"CompareCon",
+			"context",
+			"TaskSetImpl",
+			"TaskSe",
+			"argsJob[argsAkti]",
+			";\n",
+			"sizePack",
+			"pipeline",
+			"send",
+			"promise",
+			"send",
+			"send()",
+			"CompareRes",
+			"ignoreRes",
+			"CompareRes",
+			"remotepro",
+			"wid1",
+			"CompareNetwork::Job>::Reader",
+			"Reader",
+			"getJo",
+			"data",
+			"YEARWEEK(Zeit)=YEARWEEK(?)",
+			"gar ",
+			"garnicht",
+			"genT",
+			"genTf",
+			"oftIn",
+			"(.*?) - ([0-9]+?) .*",
+			"([0-9]+) - (.*?) ([0-9]+)",
+			"gar nicht",
+			"gar ",
+			"gar nicht",
+			"sort",
+			"gar nicht",
+			"gar ",
+			"gar",
+			"gar ",
+			"oftIn"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"WortBase::",
+			"WortStorage::",
+			"",
+			"restoreWortPtrStr",
+			"restoreWortStr",
+			"WortOld::",
+			"",
+			"CompareAdapter",
+			"unsigned int const k",
+			"second",
+			"first",
+			"jobList[jobIndex]",
+			"perfInd",
+			"DATE(Zeit)=?",
+			"\\1 - \\2",
+			"\\2 - \\1",
+			"\\3 - \\2 \\1",
+			"YEARWEEK(Zeit)=YEARWEEK(?)",
+			"console.log(\"Caught error: \"+err);",
+			"console.log(\"Catched error: \"+err);",
+			".unlock()",
+			".lock()",
+			".unlock_shared()",
+			".lock_shared()",
+			"link.data.connectionStrength",
+			"cdb",
+			"ConcurrentLevelDB&",
+			"ret.",
+			"ConcurrentLevelDB&",
+			"ConcurrentLevelDB const&",
+			"&",
+			"ConcurrentLevelDB const&",
+			"variance",
+			"\\1, ",
+			"",
+			"\\1, ",
+			"",
+			" ",
+			"\\3",
+			"\\2: \\1",
+			"",
+			"\"\\1\", ",
+			"\\2 - \\1",
+			"wordsT2.end()",
+			"wordsT1.end()",
+			"handleDo",
+			"slaveQueuesLock",
+			"__LINE__ << \" \" <<",
+			"GroupNetwork::jobData",
+			"slaveServer_acceptor",
+			"slaveServer_io",
+			"@param",
+			"@brief",
+			"@return",
+			"@brief",
+			"Group::compMap",
+			"compMap",
+			"\\2 - \\1",
+			"",
+			"std::\\1\\2\\3\\4\\5\\6\\7\\8",
+			"google::sparse_hash_set",
+			"google::sparse_hash_map",
+			"std::\\1\\2\\3\\4\\5\\6\\7",
+			"google::sparse_hash_set",
+			"google::sparse_hash_map",
+			"std::\\1\\2\\3\\4\\5\\6\\7",
+			"std::\\1\\2\\3\\4\\5\\6",
+			"std::\\1\\2\\3\\4\\5",
+			"std::\\1\\2\\3\\4",
+			"std::\\1\\2\\3",
+			"std::\\2",
+			"std::\\1",
+			"std::cout",
+			"unsigned int ",
+			"unsigned int",
+			"WtypeData::attr_data",
+			"google::sparse_hash_map<",
+			"boost::container::flat_map",
+			"boost::flat_map",
+			"google::sparse",
+			"google::sparse_hash_map",
+			"sparse_hash_map",
+			"wtypeList",
+			"wo.",
+			".",
+			"restoreWortPtr",
+			"restoreWortDBBin",
+			"restoreWortPtr",
+			"\\nStart:",
+			"",
+			"Point",
+			"\\n",
+			"std::runtime_error(\\1)",
+			"std::runtime_error(",
+			"throw std::runtime_error(\\1);",
+			"throw",
+			"throw std::runtime_error",
+			"std::runtime_error(\"\\1\")",
+			"sparse_hash_map<unsigned int, unsigned int>",
+			"std::pair<",
+			"std::vector<",
+			"std::pair<",
+			"std::vector<",
+			"#include <vector",
+			"std::pair",
+			"std::vector",
+			"std::pair",
+			"std::vector"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"incremental_find":
+	{
+		"height": 37.0
+	},
+	"input":
+	{
+		"height": 64.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.SublimeLinter":
+	{
+		"height": 0.0
+	},
+	"output.astyle_error_message":
+	{
+		"height": 0.0
+	},
+	"output.exec":
+	{
+		"height": 390.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "Group - Release",
+	"replace":
+	{
+		"height": 70.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 392.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 392.0
+	},
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 292.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
