@@ -4,6 +4,38 @@
 		"selected_items":
 		[
 			[
+				"onesIn",
+				"onesInA\tunsigned long long onesInA"
+			],
+			[
+				"ones",
+				"onesInB"
+			],
+			[
+				"count",
+				"countSetBits"
+			],
+			[
+				"to",
+				"to_ullong\tunsigned long long to_ullong() const"
+			],
+			[
+				"last",
+				"lastOne\tint lastOne"
+			],
+			[
+				"nu",
+				"numOnesToShift"
+			],
+			[
+				"abs",
+				"absProd\tunsigned long long absProd"
+			],
+			[
+				"sca",
+				"scalarProd\tsize_t scalarProd"
+			],
+			[
 				"MEssa",
 				"MessageSize\tMessageSize"
 			],
@@ -260,10 +292,6 @@
 				"lastAccessLoc\tsize_t lastAccessLoc"
 			],
 			[
-				"last",
-				"lastAccessLoc\tsize_t lastAccessLoc"
-			],
-			[
 				"useKe",
 				"useKey\tvoid useKey(unsigned int k, google::sparse_hash_map<unsigned int, size_t>::iterator key)"
 			],
@@ -486,34 +514,6 @@
 			[
 				"slaveQue",
 				"slaveQueue"
-			],
-			[
-				"master",
-				"masterCon"
-			],
-			[
-				"OnAcc",
-				"OnAcceptSlaves\tvoid OnAcceptSlaves(const asio::error_code &ec, std::shared_ptr<asio::ip::tcp::socket> sock)"
-			],
-			[
-				"clientA",
-				"clientServer_acceptor\tstd::shared_ptr<asio::ip::tcp::acceptor> clientServer_acceptor"
-			],
-			[
-				"err",
-				"error_code\terror_code"
-			],
-			[
-				"cli",
-				"clientThreads\tunsigned int clientThreads"
-			],
-			[
-				"sleep",
-				"sleep_for\tvoid sleep_for(const chrono::duration<_Rep, _Period> &__rtime)"
-			],
-			[
-				"stop",
-				"stopSock\tstd::atomic<bool> stopSock"
 			]
 		]
 	},
@@ -1097,6 +1097,10 @@
 		"height": 390.0
 	},
 	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.mdpopups":
 	{
 		"height": 0.0
 	},
