@@ -1,0 +1,219 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{ dsfont }
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{needspace}
+\usepackage{interval}
+\usepackage{stmaryrd}
+\usepackage{cancel}
+\usepackage{listings}
+\usepackage{hyperref}
+
+\newcommand{\limNinf}{\ensuremath{\lim\limits_{n \to \infty}}}
+\newcommand{\sumNinf}{\ensuremath{\sum\limits_{n=1}^\infty}}
+\newcommand{\sumInf}[1]{\ensuremath{\sum\limits_{#1}^\infty}}
+\newcommand{\sumN}[2]{\ensuremath{\sum\limits_{#1}^{#2}}}
+\newcommand{\nN}{\ensuremath{n \in \mathds{N}}}
+\newcommand{\nR}{\ensuremath{n \in \mathds{R}}}
+\newcommand{\inN}[1]{\ensuremath{#1 \in \mathds{N}}}
+\newcommand{\inR}[1]{\ensuremath{#1 \in \mathds{R}}}
+\newcommand{\N}{\ensuremath{\mathds{N}}}
+\newcommand{\R}{\ensuremath{\mathds{R}}}
+\newcommand{\faExp}[2]{\ensuremath{\forall #1 \ldotp #2}}
+
+
+\newcommand\IV{\mathrel{\overset{\makebox[0pt]{\mbox{\normalfont\tiny\sffamily IV}}}{\iff}}}
+
+\setlength{\parindent}{0pt}
+
+\title{MafI1 - Weihnachtsaufgabe}
+\author{208225 David Schmidt}
+\date{\textbf{Gruppe:} 4, Mi. 8-10 bei Simon Demes,\\ \textbf{Abgabe:} 11.01.2019, 14:00 Uhr}
+
+\begin{document}
+
+\maketitle
+\section{Vorüberlegungen}
+
+\subsection{Vereinfachung der Ausgangsformel für $\vec a,\vec b \in M(n)$}
+
+\begin{flalign*}
+& A_\Delta(\vec a,\vec b) = \frac{1}{2}\sqrt{(|\vec a| \cdot |\vec b|)^2-(\vec a \bullet \vec b)^2} & \cdot 2, ()^2\\
+& 4 \cdot A_\Delta(\vec a,\vec b)^2 = (|\vec a| \cdot |\vec b|)^2-(\vec a \bullet \vec b)^2 & |\vec a| = \sqrt{a_1^2+a_2^2+...+a_n^2}\\
+& = (\sqrt{a_1^2+...+a_n^2} \cdot \sqrt{b_1^2+...+b_n^2})^2-(\vec a \bullet \vec b)^2 & \faExp{a_i \in \{0,1\}}{a_i^2=a_i}\\
+& = (\sqrt{a_1+...+a_n})^2 \cdot (\sqrt{b_1+...+b_n})^2-(\vec a \bullet \vec b)^2 & \\
+& = \sumN{i=1}{n}a_i \cdot \sumN{i=1}{n}b_i-(\vec a \bullet \vec b)^2 & \vec a \bullet \vec b = \sumN{i=1}{n}(a_i \cdot b_i) \\
+& = \sumN{i=1}{n}a_i \cdot \sumN{i=1}{n}b_i-(\sumN{i=1}{n}(a_i \cdot b_i))^2 & 
+\end{flalign*}
+
+\subsection{Abschätzung der Ausgangsformel für $\vec a,\vec b \in M(n)$}
+Da $\vec a,\vec b \in \{0,1\}^n$ ist $\inN{4A_\Delta(\vec a,\vec b)^2}$. Laut Aufgabenstellung soll gelten:
+\begin{flalign*}
+& A_\Delta(\vec a,\vec b) < 19  & \\
+& \iff 4(A_\Delta(\vec a,\vec b))^2 < 1444 & \\
+& \iff \sumN{i=1}{n}a_i \cdot \sumN{i=1}{n}b_i-(\sumN{i=1}{n}(a_i \cdot b_i))^2 < 1444 &
+\end{flalign*}
+Da wie oben beschrieben nur natürliche Zahlen in Frage kommen, ist die kleinste natürliche Zahl, die diese Beziehung erfüllt, offensichtlich der Vorgänger von 1444, also 1443. Somit ergibt sich für die zu minimierende Differenz von $19-A_\Delta(\vec a,\vec b) = 19-\frac{1}{2}\sqrt{1443} \approx 19-18,99341991 \approx 6,580086778 \cdot 10^{-3}$
+
+Da zwischen 1443 und 1444 keine natürliche Zahl liegt, und wir trivialerweise in $4(A_\Delta(\vec a,\vec b))^2$ keine negativen Werte erhalten können (die ohnehin nur zu einer Vergrößerung der zu minimierenden Differenz führen würden), kommen wir mit $A_\Delta(\vec a,\vec b)$ nicht näher an die 19 heran.
+
+$4(A_\Delta(\vec a,\vec b))^2 = \underbrace{\sumN{i=1}{n}a_i \cdot \sumN{i=1}{n}b_i}_{\text{(1)}}-\underbrace{(\sumN{i=1}{n}(a_i \cdot b_i))^2}_{\text{(2)}}$
+
+Um sich diesen einfachen Umstand zu verdeutlichen, ist es sinnvoll, sich zu überlegen, dass wir in (1) lediglich die Einsen in $\vec a$ und $\vec b$ zählen und multiplizieren. In (2) zählen wir die Positionen in den Vektoren, wo in $\vec a$ und $\vec b$ eine 1 steht (im Grunde also ein logisches AND). Dieser Wert wird dann noch quadriert. Für die ganze Formel gilt also, dass wir mit den Zahlen 0 und 1 sowie den Grundrechenarten nie die ganzen Zahlen verlassen (was offensichtlich sein sollte). Die natürlichen Zahlen verlassen wir ebenfalls nicht, da Folgendes gilt:
+\begin{flalign*}
+& \sumN{i=1}{n}(a_i \cdot b_i) \leq min(\sumN{i=1}{n}a_i,\sumN{i=1}{n}b_i) & \\
+& \iff (\sumN{i=1}{n}(a_i \cdot b_i))^2 \leq (min(\sumN{i=1}{n}a_i,\sumN{i=1}{n}b_i))^2 \leq \sumN{i=1}{n}a_i \cdot \sumN{i=1}{n}b_i & \\
+\end{flalign*}
+
+Es können offensichtlich nicht an mehr Stellen Einsen in $\vec a$ UND $\vec b$ stehen, als in einem der beiden Vektoren überhaupt Einsen stehen.\\
+Damit ist gezeigt, dass $\inN{4(A_\Delta(\vec a,\vec b))^2}$ und damit auch, dass $1443$ die kleinste so erreichbare Zahl $<1444$ ist, wir also nicht näher an die 19 herankommen, ohne sie zu erreichen, was genau unserer Zielsetzung entspricht.
+ 
+\section{Triviale Lösung für $\vec a,\vec b \in M(n)$}
+
+Eine triviale Lösung ergibt sich direkt für die Dimension $n=1444$. Wir suchen zwei Vektoren, deren Produkt der Anzahl der Einsen gerade 1443 ergibt, deren Skalarprodukt aber 0 ist, also an keiner Stelle in beiden Vektoren eine 1 steht. Dies trifft in Dimension 1444 für folgende Vektoren gerade zu:
+
+$\vec a = \begin{pmatrix}1\\0\\0\\...\end{pmatrix}$ und $\vec b = \begin{pmatrix}0\\1\\1\\...\end{pmatrix}$
+
+Genau genommen trifft es sogar für jeden Vektor zu in dem gilt: $\vec a,\vec b \in \{0,1\}^{1444}$ mit
+
+$\vec a = \begin{pmatrix}a_1\\a_2\\...\\a_{1444}\end{pmatrix}, \vec b = \begin{pmatrix}b_1\\b_2\\...\\b_{1444}\end{pmatrix} \text{ und } \sumN{i=1}{n}(a_i) = 1 \text{ und } \sumN{i=1}{n}(b_i) = 1443 \text{ und }$\\ $\faExp{\inN{i}, 1\leq i \leq 1444}{a_i \oplus b_i}$ ($\oplus$ steht hier für das logische XOR, wenn man $1=T$ und $0=F$ interpretiert).
+
+Damit haben wir bereits 1444 mögliche Lösungen für das Problem gefunden, jedoch ist die Dimension mit 1444 auch sehr hoch. Somit versuchen wir im Folgenden, die kleinste Dimension zu finden, mit der wir mit Bitvektoren maximal nah an die 19 herankommen.
+
+\section{Notwendiges Kriterium für die minimale Dimension}
+
+Offensichtlich muss $\sumN{i=1}{n}a_i \cdot \sumN{i=1}{n}b_i$ mindestens 1443 sein, damit wir die 1443 erreichen können, da Teil (2) ebenfalls eine natürliche Zahl ist (Quadrat einer Summe von Einsen) und sich so in jedem Fall "negativ" auf das Gesamtergebnis auswirkt. Die größte Zahl, die wir ohne Beachtung von (2) in (1) für jede Dimension erreichen können, ist gerade, wenn alle Einträge in beiden Vektoren auf 1 stehen. Daraus ergibt sich eine notwendige minimale Dimension von
+
+$\lceil \sqrt{1443} \rceil \approx \lceil 37,98683983 \rceil = 38$
+
+Denn mit $38 \cdot 38 = 1444$ sind wir gerade über 1443. Alle Vektoren mit einer Dimension, die kleiner als 38 ist, kann also schon wegen Teil (1) nicht den Wert 1443 annehmen. Dabei handelt es sich jedoch nur um ein notwendiges Kriterium, da wir noch nicht gezeigt haben, dass in diesem Fall auch zwei Vektoren existieren müssen, sodass $4(A_\Delta(\vec a,\vec b))^2 = 1443$ gilt.
+
+\section{Weiterführende Überlegungen zur minimalen Dimension}
+
+Eine kurze Überlegung zeigt uns jedoch, dass es in Dimension 38 noch nicht möglich ist, genau auf den Wert 1443 zu kommen. Um in (1) überhaupt auf bzw. über 1443 zu kommen, müssen in Dimension 38 zwangsläufig alle Einträge auf 1 stehen. Damit gilt in Teil (2) jedoch auch:
+
+$(\sumN{i=1}{38}(a_i \cdot b_i))^2 = (\sumN{i=1}{38}(1))^2 = 38^2 = 1444$
+
+Da dieser Teil jedoch von (1) abgezogen wird, ergibt sich für $4(A_\Delta(\vec a,\vec b))^2$ gerade ein Wert von 0, also offensichtlich nicht 1443. Wir müssen uns also (in Anlehnung an das Schubfachprinzip) Gedanken dazu machen, wie groß $4(A_\Delta(\vec a,\vec b))^2$ in einer bestimmten Dimension maximal sein kann. Erst wenn dieser Maximalwert größer oder gleich 1443 ist, lohnt es sich überhaupt, nach konkreten Vektoren zu suchen.
+
+Als Grundlage dieser Überlegungen sei wie üblich $n$ die Anzahl der Dimensionen,
+
+$\vec a = \begin{pmatrix}a_1\\a_2\\...\\a_{n}\end{pmatrix}, \vec b = \begin{pmatrix}b_1\\b_2\\...\\b_{n}\end{pmatrix} \text{ mit } \vec a, \vec b \in M(n)$
+
+$\inN{e_a, e_b} \text{ mit } 0 \leq e_a,e_b \leq n$ die Anzahl der Einsen in $\vec a \text{ bzw. } \vec b$
+
+Dann entspricht (1) gerade $e_a \cdot e_b$. (2) variiert je nach Verteilung der Einsen auf den Vektor.
+
+\subsection{Fall $n-e_a \leq e_b \text{ und } n-e_b \leq e_a$}
+
+Damit $4(A_\Delta(\vec a,\vec b))^2$ maximal wird, muss entsprechend (2) bzw. $(\sumN{i=1}{n}(a_i \cdot b_i))^2$ minimal werden. Dies ist gerade dann der Fall, wenn überall da, wo im einen Vektor eine 0 steht, im anderen eine 1 steht. Dies setzt natürlich voraus, dass $n-e_a \leq e_b \text{ und } n-e_b \leq e_a$, also dass es in keinem Vektor mehr Nullen gibt, als es im Anderen Einsen gibt. 
+
+Gelte nun also $n-e_a \leq e_b \text{ und } n-e_b \leq e_a$. Dann gilt: $\exists \vec a, \vec b \in M(n) \ldotp \faExp{\inN{i}, 1 \leq i \leq n}{(a_i = 1 \land b_i = 0) \lor (a_i = 0 \land b_i = 1) \lor (a_i = b_i = 1) \ldotp}$
+
+Dann gilt:
+
+$min(\sumN{i=1}{n}(a_i \cdot b_i)) = \underbrace{n - ((n-e_a)+(n-e_b))}_{(3)} = n - (2n-e_a-e_b) = e_a + e_b - n$
+
+Zur Erklärung von (3): Da wir dafür gesorgt haben, dass möglichst wenige Stellen übrig bleiben, an denen in beiden Vektoren eine Eins steht, können wir einfach die Anzahl der Nullen in beiden Vektoren addieren. Einsen stehen dann nur an allen anderen Stellen, also gerade an $n - \underbrace{ ((n-e_a)+(n-e_b))}_{\text{Gesamtanzahl Nullen}}$ Stellen. 
+
+Dies entspricht in diesem Fall dem Skalarprodukt. Grundsätzlich könnte $n - (2n-e_a-e_b)$ auch negativ werden, wenn $e_a, e_b << n$ sind. Aufgrund der Voraussetzung oben ist dies jedoch nicht möglich. Damit gilt auch für (2):
+
+$min((\sumN{i=1}{n}(a_i \cdot b_i))^2) = (min(\sumN{i=1}{n}(a_i \cdot b_i)))^2 = (e_a + e_b - n)^2$
+
+Es gilt also $max(4(A_\Delta(\vec a,\vec b))^2) = e_a \cdot e_b - min((\sumN{i=1}{n}(a_i \cdot b_i))^2) = e_a \cdot e_b - (e_a + e_b - n)^2$
+
+\subsection{Fall $n-e_a > e_b \text{ oder } n-e_b > e_a$}
+
+Ist die Voraussetzung vom ersten Fall nicht gegeben, ist (2) automatisch 0, wenn man sicherstellt, dass $\nexists \inN{i}, 1 \leq i \leq n \ldotp a_i = b_i = 1$. Dies ist offensichtlich nur im oben genannten Sonderfall möglich, da es (nach bzw. in Anlehnung an das Schubfachprinzip) sonst mindestens eine Position gibt, an der beide Vektoren eine Eins enthalten. In diesem Sonderfall ist $max(4(A_\Delta(\vec a,\vec b))^2) = e_a \cdot e_b$.
+
+\section{Computergestützte Findung der tatsächlichen minimalen Dimension und einiger Beispiele}
+
+Dass all die obigen Überlegungen notwendig waren, kann man sich leicht vor Augen führen, wenn man die riesige Anzahl an Möglichkeiten beachtet, zwei Bitvektoren mit Dimensionen zwischen 38 und 1444 zu wählen. Alleine für die Dimension 1444 ergäben sich $2^{1444}$ mögliche Bitvektoren, also eine unvorstellbar große Zahl. 
+
+Wir wollen also zunächst klein anfangen und die kleinste Dimension finden, in der es eine Kombination mit $max(4(A_\Delta(\vec a,\vec b))^2) \geq 1443$ gibt:
+
+\lstset{language=C++}
+
+\begin{lstlisting}[frame=single]
+void findFirstMax() {
+    for(int n = 1; n <= 1444; ++n) {//dimensions
+        //starting with 38 would work, too
+        // -> others break because >n
+        for(unsigned int onesInA = 1;
+                onesInA <= n;
+                ++onesInA) {
+            //1 if we need to round up
+            //because there is a remaining
+            unsigned int roundUp = 1;
+
+            //true if there is no remaining
+            if(1443 % onesInA == 0)
+                roundUp = 1;
+
+            unsigned int newStart = 1443
+                                    / onesInA
+                                    + roundUp;
+
+            for(unsigned int onesInB = newStart;
+                    onesInB <= n;
+                    ++onesInB) {
+                unsigned int scalMin = onesInA
+                                       + onesInB
+                                       - n;
+                unsigned int max = onesInA * onesInB
+                                   - scalMin * scalMin;
+
+                if(max >= 1443) {
+                    std::cout << "N: " << n
+                              << " A: " << onesInA
+                              << " B: " << onesInB
+                              << " - " << max
+                              << std::endl;
+                    return;
+                }
+            }
+        }
+    }
+}
+\end{lstlisting}
+
+\clearpage
+Dieses Programm liefert uns nach kurzer Zeit folgendes Ergebnis:
+
+\begin{lstlisting}[frame=single]
+N: 66 A: 41 B: 44 - 1443
+\end{lstlisting}
+
+Wenn in Dimension 66 einer der beiden Vektoren also 41 Einsen enthält und der andere genau 44 Einsen, dann ist der maximal für $4(A_\Delta(\vec a,\vec b))^2$ erreichbare Wert genau 1443. Das heißt aber auch, dass in einer Dimension, die kleiner ist als 66, der nächstmögliche Wert an 19 nicht erreichbar ist.
+
+Wenn wir uns an die Überlegungen zum maximalen Wert erinnern, bemerken wir schnell, dass wenn das Maximum genau der gesuchte Wert ist, an jeder Position, an der in einem Vektor eine Null steht, im Anderen eine Eins stehen muss. Dies ergibt z.B. folgenden Vektor als eine Lösung für unser Problem:
+
+$(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,\\
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1)^T = \vec a\\
+(1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,\\
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1)^T = \vec b$
+
+Dann gilt:
+
+\begin{flalign*}
+& A_\Delta(\vec a,\vec b) = \frac{1}{2} \sqrt{(|\vec a| \cdot |\vec b|)^2 - (\vec a \bullet \vec b)^2} & \\
+& = \frac{1}{2} \sqrt{(\sqrt{\sumN{i=1}{66}a_i} \cdot \sqrt{\sumN{i=1}{66}b_i})^2 - (\sumN{i=1}{66}(a_i \cdot b_i))^2} & \\
+& = \frac{1}{2} \sqrt{(\sqrt{41} \cdot \sqrt{44})^2 - (19)^2} & \\
+& = \frac{1}{2} \sqrt{1804 - 361} & \\
+& = \frac{1}{2} \sqrt{1443} & \\
+& \approx 18,99341991 & \\
+\end{flalign*}
+
+Damit ist auch ein Beispiel für ein Bitvektor-Paar in der kleinstmöglichen Dimension gefunden, die Aufgabe also gelöst.
+Natürlich gibt es noch deutlich mehr Beispiele, alleine in Dimension 66 muss lediglich sichergestellt werden, dass alle Nullen im jeweils anderen Vektor auf eine Eins treffen. Das Ergebnis bleibt dann unabhängig von der "Reihenfolge" der Einträge identisch.
+
+Die Suche mit einem "Brute-Force"-Ansatz erweist sich auch mit SIMD und höchstwahrscheinlich auch mit Hardwarebeschleunigung durch eine Grafikkarte als nahezu aussichtslos. Ein Ansatz hierzu ist auf GitHub unter ... zu finden. Dieser verwendet Multithreading sowie mit einigen eigenen Ergänzungen die SIMD-Bitset-Bibliothek von Michael Tieying-Zhang:
+
+\url{https://github.com/Michael-Tieying-Zhang/SIMD-Bitset}
+
+
+
+\end{document}

@@ -4,12 +4,44 @@
 		"selected_items":
 		[
 			[
-				"onesIn",
-				"onesInA\tunsigned long long onesInA"
+				"find",
+				"findSolution\tvoid findSolution(unsigned int threadID)"
+			],
+			[
+				"thre",
+				"threadNum"
+			],
+			[
+				"Se",
+				"Set\tvoid Set(std::vector<int> &bits)"
+			],
+			[
+				"Set",
+				"Set\tvoid Set(int bit, bool setToOne)"
+			],
+			[
+				"num_b",
+				"num_bits_\tint num_bits_"
+			],
+			[
+				"Get",
+				"Get\tbool Get(int bit)"
+			],
+			[
+				"size",
+				"size_t\tsize_t"
+			],
+			[
+				"Co",
+				"CountAnd\tint CountAnd(Bitset &rh_bitset)"
 			],
 			[
 				"ones",
-				"onesInB"
+				"onesInA"
+			],
+			[
+				"onesIn",
+				"onesInA\tunsigned long long onesInA"
 			],
 			[
 				"count",
@@ -264,10 +296,6 @@
 				"insert\tstd::pair<iterator, bool> insert(const value_type &__x)"
 			],
 			[
-				"Co",
-				"CompareNetwork"
-			],
-			[
 				"er",
 				"erase\tsize_type erase(const key_type &__x)"
 			],
@@ -334,10 +362,6 @@
 			[
 				"per",
 				"perfInd"
-			],
-			[
-				"size",
-				"sizePack\tconst double sizePack"
 			],
 			[
 				"Gr",
@@ -490,30 +514,6 @@
 			[
 				"avgTf",
 				"avgTfidf2\tdouble avgTfidf2"
-			],
-			[
-				"anzT",
-				"anzTfidf1"
-			],
-			[
-				"try",
-				"try_dequeue\tbool try_dequeue(U &item)"
-			],
-			[
-				"retur",
-				"returnedJobs"
-			],
-			[
-				"ret",
-				"returnQ"
-			],
-			[
-				"slaveC",
-				"slaveQCounter\tGroupNetwork::shared_atomic<unsigned int> slaveQCounter"
-			],
-			[
-				"slaveQue",
-				"slaveQueue"
 			]
 		]
 	},
@@ -769,7 +769,7 @@
 	],
 	"find":
 	{
-		"height": 37.0
+		"height": 49.0
 	},
 	"find_in_files":
 	{
@@ -803,6 +803,15 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"get",
+			"Test",
+			".*?(https://youtu\\.be/.*?)&quot;.*?",
+			".*(https://youtu\\.be/.*?)&quot;.*",
+			".*?(https://youtu\\.be/.*?)&quot;.*?",
+			".*(https://youtu\\.be/.*?)&quot;.*",
+			".*(https://youtu\\.be.*?)&qout;.*",
+			".*(https://youtu.be.*?)&qout;.*",
+			"        //",
 			"GroupSlave.h",
 			"WortOld",
 			"WORT",
@@ -921,23 +930,16 @@
 			"genTf",
 			"oftIn",
 			"(.*?) - ([0-9]+?) .*",
-			"([0-9]+) - (.*?) ([0-9]+)",
-			"gar nicht",
-			"gar ",
-			"gar nicht",
-			"sort",
-			"gar nicht",
-			"gar ",
-			"gar",
-			"gar ",
-			"oftIn"
+			"([0-9]+) - (.*?) ([0-9]+)"
 		],
 		"highlight": true,
 		"in_selection": false,
 		"preserve_case": false,
-		"regex": false,
+		"regex": true,
 		"replace_history":
 		[
+			"\\1\\n",
+			"\\1",
 			"WortBase::",
 			"WortStorage::",
 			"",
@@ -1107,7 +1109,7 @@
 	"pinned_build_system": "Group - Release",
 	"replace":
 	{
-		"height": 70.0
+		"height": 90.0
 	},
 	"save_all_on_build": true,
 	"select_file":

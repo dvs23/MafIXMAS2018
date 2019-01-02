@@ -156,7 +156,51 @@ void findSolution(unsigned int threadID) {
     }
 }
 
+void findFirstMax() {
+    for(int n = 1; n <= 1444; ++n) {//dimensions
+        //starting with 38 would work, too
+        // -> others break because >n
+        for(unsigned int onesInA = 1;
+                onesInA <= n;
+                ++onesInA) {
+            //1 if we need to round up
+            //because there is a remaining
+            unsigned int roundUp = 1;
+
+            //true if there is no remaining
+            if(1443 % onesInA == 0)
+                roundUp = 1;
+
+            unsigned int newStart = 1443
+                                    / onesInA
+                                    + roundUp;
+
+            for(unsigned int onesInB = newStart;
+                    onesInB <= n;
+                    ++onesInB) {
+                unsigned int scalMin = onesInA
+                                       + onesInB
+                                       - n;
+                unsigned int max = onesInA * onesInB
+                                   - scalMin * scalMin;
+
+                if(max >= 1443) {
+                    std::cout << "N: " << n
+                              << " A: " << onesInA
+                              << " B: " << onesInB
+                              << " - " << max
+                              << std::endl;
+                    return;
+                }
+            }
+        }
+    }
+}
+
 int main(int argc, char const* argv[]) {
+    std::cout << "First possibly working max found at:" << std::endl;
+    findFirstMax();
+
     std::vector<std::thread> thrs;
 
     for(unsigned int i = 0; i < threadNum; ++i) {
