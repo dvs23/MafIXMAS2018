@@ -3,11 +3,8 @@ project(MafIXMAS2018)
 
 link_directories(/usr/lib)
 
-include_directories(include)
 include_directories(SIMD-Bitset)
 include_directories(/usr/include)
-
-file(GLOB SOURCES "src/*.cpp")
 
 #-fexceptions -Wnon-virtual-dtor -Wshadow -Winit-self -Wredundant-decls -Wcast-align -Wfloat-equal -Wunreachable-code -Wmissing-include-dirs -Wswitch-enum -Wswitch-default -Wzero-as-null-pointer-constant -Wmain -Wextra -Wall
 

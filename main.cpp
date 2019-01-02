@@ -84,15 +84,6 @@ void findSolution(unsigned int threadID) {
                     Bitset b(n);
                     setOnes(onesInB, b);
 
-                    try {
-                        for(unsigned int i = 0; i < threadID; ++i)//start with different bitsets -> after that every threadNum-th
-                            nextNum(b, n);
-                    }
-                    catch(std::runtime_error& ex) {
-                        continue;
-                    }
-
-
                     while(true) {
                         //std::cout << b.to_string() << "\n";
                         unsigned int absProd = onesInA * onesInB;
@@ -113,8 +104,7 @@ void findSolution(unsigned int threadID) {
 
 
                         try {
-                            for(unsigned int i = 0; i < threadNum; ++i)//only calc every threadNum-th calculation
-                                nextNum(b, n);
+                            nextNum(b, n);
                         }
                         catch(std::runtime_error& ex) {
                             break;
