@@ -87,22 +87,29 @@ class Bitset {
     }
 
     // Note: the bit starts from 0
+    void Set(int bit) {
+        // Ensure the bitset has already inited
+        assert(num_bits_ > 0);
+
+        int idx = bit / CHAR_SIZE;
+        int offbit = bit % CHAR_SIZE;
+
+        char offset = 0x01;
+        offset = offset << offbit;
+
+        // std::cout << "bit--" << bit << ":: idx--" << idx << " offbit--" << offbit
+        //          << " offset--" << (unsigned short)offset << std::endl;
+
+        bits_[idx] |= offset;
+    }
+
+    // Note: the bit starts from 0
     void Set(int bit, bool setToOne) {
         // Ensure the bitset has already inited
         assert(num_bits_ > 0);
 
-        if(setToOne) {
-            int idx = bit / CHAR_SIZE;
-            int offbit = bit % CHAR_SIZE;
-
-            char offset = 0x01;
-            offset = offset << offbit;
-
-            // std::cout << "bit--" << bit << ":: idx--" << idx << " offbit--" << offbit
-            //          << " offset--" << (unsigned short)offset << std::endl;
-
-            bits_[idx] |= offset;
-        }
+        if(setToOne)
+            Set(bit);
         else {
             int idx = bit / CHAR_SIZE;
             int offbit = bit % CHAR_SIZE;
@@ -110,10 +117,7 @@ class Bitset {
             char offset = 0x01;
             offset = offset << offbit;
 
-            // std::cout << "bit--" << bit << ":: idx--" << idx << " offbit--" << offbit
-            //          << " offset--" << (unsigned short)offset << std::endl;
-
-            bits_[idx] ^= offset;
+            bits_[idx] &= ~offset;
         }
     }
 
@@ -235,6 +239,20 @@ class Bitset {
     }
 
     int Size() { return num_bits_; }
+
+    std::string to_string() {
+        std::string ret = "";
+        ret.reserve(num_bits_);
+
+        for(size_t i = 0; i < num_bits_; ++i) {
+            if(Get(i))
+                ret = "1" + ret;
+            else
+                ret = "0" + ret;
+        }
+
+        return ret;
+    }
 
     /////////////////////////////////////////////////////////////////////////////
     // SIMD 128 Implementation

@@ -14,12 +14,36 @@ int main() {
     bitset1.Set(35);
     bitset1.Set(87);
 
+    std::cout << "bitset1:" << std::endl;
+
+    for(size_t i = 0; i < 100; ++i) {
+        if(bitset1.Get(i))
+            std::cout << i << std::endl;
+    }
+
     // Set bitset2
     bitset2.Set(3);
     bitset2.Set(10);
     bitset2.Set(14);
     bitset2.Set(64);
     bitset2.Set(87);
+
+    std::cout << "bitset2:" << std::endl;
+
+    for(size_t i = 0; i < 100; ++i) {
+        if(bitset2.Get(i))
+            std::cout << i << std::endl;
+    }
+
+    bitset2.Set(3, false);
+
+    std::cout << "bitset2:" << std::endl;
+
+    for(size_t i = 0; i < 100; ++i) {
+        if(bitset2.Get(i))
+            std::cout << i << std::endl;
+    }
+
 
     // bitset1.Count(63);
 

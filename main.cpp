@@ -1,21 +1,21 @@
 #include <iostream>
 #include <limits>
-#include <bitset>
+#include <bitset.h>
 #include <cmath>
 
-void nextNum(std::bitset<1444>& bnum, unsigned int ndim) {
+void nextNum(Bitset& bnum, unsigned int ndim) {
     if(ndim > 1444)
         throw std::runtime_error("Dimension too high!");
 
     int lastZero = -1;
     int lastOne = -1;
 
-    while(lastZero + 1 < ndim && !bnum.test(lastZero + 1))
+    while(lastZero + 1 < ndim && !bnum.Get(lastZero + 1))
         ++lastZero;
 
     lastOne = lastZero;
 
-    while(lastOne + 1 < ndim && bnum.test(lastOne + 1))
+    while(lastOne + 1 < ndim && bnum.Get(lastOne + 1))
         ++lastOne;
 
     if(lastOne == -1 || lastOne + 1 >= ndim)
@@ -25,20 +25,20 @@ void nextNum(std::bitset<1444>& bnum, unsigned int ndim) {
 
     for(int i = 0; i < lastOne; ++i) {
         if(i < numOnesToShift)
-            bnum.set(i, true);
+            bnum.Set(i, true);
         else
-            bnum.set(i, false);
+            bnum.Set(i, false);
     }
 
-    bnum.set(lastOne, false);
-    bnum.set(lastOne + 1, true);
+    bnum.Set(lastOne, false);
+    bnum.Set(lastOne + 1, true);
 }
 
-void setOnes(unsigned int numOnes, std::bitset<1444>& bs) {
-    bs.reset();
+void setOnes(unsigned int numOnes, Bitset& bs) {
+    bs.Clear();
 
     for(unsigned int i = 0; i < numOnes; ++i)
-        bs.set(i);
+        bs.Set(i);
 }
 
 int main(int argc, char const* argv[]) {
@@ -98,6 +98,35 @@ int main(int argc, char const* argv[]) {
         }
     }*/
 
+    /*Bitset test(66);
+    std::vector<int> v;
+    std::string bad = "000000000000000000000001111111111111111111111111111111111111111010";
+
+    for(size_t i = 0; i < 66; i++) {
+        if(bad[65 - i] == '1')
+            v.push_back(i);
+    }
+
+    test.Set(v);
+
+    nextNum(test, 66);
+
+    std::cout<<test.to_string()<<std::endl;*/
+
+    std::vector<int> aVec;
+
+    for(int i = 0; i < 66; ++i) {
+        if(i >= 25)
+            aVec.push_back(i);
+    }
+
+    std::vector<int> bVec;
+
+    for(int i = 0; i < 66; ++i) {
+        if(i < 25 || i >= 47)
+            bVec.push_back(i);
+    }
+
     for(unsigned int n = 38; n <= 1444; ++n) { //dimensions
         std::cout << n << std::endl;
 
@@ -106,13 +135,16 @@ int main(int argc, char const* argv[]) {
         // all combinations of numbers of set bits in a and b which are multiplied >= 1443
         for(unsigned int onesInA = 38; onesInA <= n; ++onesInA) {//38 = notw. min. Dimension
             std::cout << "onesInA: " << onesInA << std::endl;
-            std::bitset<1444> a = 0;
+            Bitset a(n);
             setOnes(onesInA, a);//"smallest" vector with onesInA bits is with all bits set on the right
+
 
             //we don't have to go through all possible vectors with onesInA ones if we can't find an appropriate onesInB
             bool foundPossibleOnesInB = false;
 
             while(true) {//go through all a vectors with onesInA ones
+                std::cout << a.to_string() << "\n";
+
                 //make the "which are multiplied >= 1443" part sure with choosing an appropriate onesInB
                 for(unsigned int onesInB = 1443 / onesInA + (1443 % onesInA == 0 ? 0 : 1); onesInB <= n; ++onesInB) {
                     if(onesInA * onesInB - (onesInA + onesInB - n) * (onesInA + onesInB - n) < 1443)
@@ -120,15 +152,18 @@ int main(int argc, char const* argv[]) {
 
                     std::cout << "onesInB: " << onesInB << std::endl;
 
+
                     foundPossibleOnesInB = true;//if we don't find an appropriate onesInB, this number of onesInA won't work in any combination -> break
 
-                    std::bitset<1444> b = 0;
+                    Bitset b(n);
                     setOnes(onesInB, b);
 
+
                     while(true) {
+                        std::cout << b.to_string() << "\n";
                         unsigned int absProd = onesInA * onesInB;
 
-                        unsigned int scalarProd = (a & b).count();
+                        unsigned int scalarProd = a.CountAnd(b);
                         unsigned int res = absProd - scalarProd * scalarProd;
 
                         if(res < 1444)
@@ -137,10 +172,11 @@ int main(int argc, char const* argv[]) {
 
                         if(res == 1443) {
                             std::cout << "N: " << n << std::endl
-                                      << "a: " << a.to_string().substr(1444 - n, n) << std::endl//only show relevant part of bitset
-                                      << "b: " << b.to_string().substr(1444 - n, n) << std::endl;
-                            //return 0;
+                                      << "a: " << a.to_string() << std::endl//only show relevant part of bitset
+                                      << "b: " << b.to_string() << std::endl;
+                            return 0;
                         }
+
 
                         try {
                             nextNum(b, n);
