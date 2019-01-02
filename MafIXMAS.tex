@@ -77,6 +77,19 @@ Eine triviale Lösung ergibt sich direkt für die Dimension $n=1444$. Wir suchen
 
 $\vec a = \begin{pmatrix}1\\0\\0\\...\end{pmatrix}$ und $\vec b = \begin{pmatrix}0\\1\\1\\...\end{pmatrix}$
 
+Anders notiert:
+$a_i = 
+\begin{cases}
+1 & \text{für } i=1 \\
+0 & \text{für } 2 \leq i \leq 1444
+\end{cases}
+b_i = 
+\begin{cases}
+0 & \text{für } i=1 \\
+1 & \text{für } 2 \leq i \leq 1444
+\end{cases}
+$
+
 Genau genommen trifft es sogar für jeden Vektor zu in dem gilt: $\vec a,\vec b \in \{0,1\}^{1444}$ mit
 
 $\vec a = \begin{pmatrix}a_1\\a_2\\...\\a_{1444}\end{pmatrix}, \vec b = \begin{pmatrix}b_1\\b_2\\...\\b_{1444}\end{pmatrix} \text{ und } \sumN{i=1}{n}(a_i) = 1 \text{ und } \sumN{i=1}{n}(b_i) = 1443 \text{ und }$\\ $\faExp{\inN{i}, 1\leq i \leq 1444}{a_i \oplus b_i}$ ($\oplus$ steht hier für das logische XOR, wenn man $1=T$ und $0=F$ interpretiert).
@@ -180,7 +193,6 @@ void findFirstMax() {
 }
 \end{lstlisting}
 
-\clearpage
 Dieses Programm liefert uns nach kurzer Zeit folgendes Ergebnis:
 
 \begin{lstlisting}[frame=single]
@@ -195,6 +207,20 @@ $(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,\\
 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1)^T = \vec a\\
 (1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,\\
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1)^T = \vec b$
+
+Anders notiert:
+$a_i = 
+\begin{cases}
+0 & \text{für } 1 \leq i \leq 25 \\
+1 & \text{für } 26 \leq i \leq 66
+\end{cases}
+b_i = 
+\begin{cases}
+1 & \text{für } 1 \leq i \leq 25 \\
+0 & \text{für } 26 \leq i \leq 47 \\
+1 & \text{für } 48 \leq i \leq 66
+\end{cases}
+$
 
 Dann gilt:
 

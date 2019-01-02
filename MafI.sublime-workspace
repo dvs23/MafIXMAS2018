@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"roun",
+				"roundf\tfloat roundf(float __x)"
+			],
+			[
 				"find",
 				"findSolution\tvoid findSolution(unsigned int threadID)"
 			],
@@ -510,10 +514,6 @@
 			[
 				"relevan",
 				"relevantIDsT2\tstd::set<unsigned int> relevantIDsT2"
-			],
-			[
-				"avgTf",
-				"avgTfidf2\tdouble avgTfidf2"
 			]
 		]
 	},
