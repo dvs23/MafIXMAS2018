@@ -2,6 +2,9 @@
 #include <limits>
 #include <bitset.h>
 #include <cmath>
+#include <thread>
+
+const unsigned int threadNum = 8;
 
 void nextNum(Bitset& bnum, unsigned int ndim) {
     if(ndim > 1444)
@@ -41,7 +44,130 @@ void setOnes(unsigned int numOnes, Bitset& bs) {
         bs.Set(i);
 }
 
+void findSolution(unsigned int threadID) {
+    for(unsigned int n = 38; n <= 1444; ++n) { //dimensions
+        std::cout << n << std::endl;
+
+        unsigned int best = 0;
+
+        // all combinations of numbers of set bits in a and b which are multiplied >= 1443
+        for(unsigned int onesInA = 38; onesInA <= n; ++onesInA) {//38 = notw. min. Dimension
+            std::cout << "onesInA: " << onesInA << std::endl;
+            Bitset a(n);
+            setOnes(onesInA, a);//"smallest" vector with onesInA bits is with all bits set on the right
+
+            try {
+                for(unsigned int i = 0; i < threadID; ++i)//start with different bitsets -> after that every threadNum-th
+                    nextNum(a, n);
+            }
+            catch(std::runtime_error& ex) {
+                continue;
+            }
+
+
+            //we don't have to go through all possible vectors with onesInA ones if we can't find an appropriate onesInB
+            bool foundPossibleOnesInB = false;
+
+            while(true) {//go through all a vectors with onesInA ones
+                //std::cout << a.to_string() << "\n";
+
+                //make the "which are multiplied >= 1443" part sure with choosing an appropriate onesInB
+                for(unsigned int onesInB = 1443 / onesInA + (1443 % onesInA == 0 ? 0 : 1); onesInB <= n; ++onesInB) {
+                    if(onesInA * onesInB - (onesInA + onesInB - n) * (onesInA + onesInB - n) < 1443)
+                        continue;
+
+                    //std::cout << "onesInB: " << onesInB << std::endl;
+
+
+                    foundPossibleOnesInB = true;//if we don't find an appropriate onesInB, this number of onesInA won't work in any combination -> break
+
+                    Bitset b(n);
+                    setOnes(onesInB, b);
+
+                    try {
+                        for(unsigned int i = 0; i < threadID; ++i)//start with different bitsets -> after that every threadNum-th
+                            nextNum(b, n);
+                    }
+                    catch(std::runtime_error& ex) {
+                        continue;
+                    }
+
+
+                    while(true) {
+                        //std::cout << b.to_string() << "\n";
+                        unsigned int absProd = onesInA * onesInB;
+
+                        unsigned int scalarProd = a.CountAnd(b);
+                        unsigned int res = absProd - scalarProd * scalarProd;
+
+                        if(res < 1444)
+                            best = std::max(best, res);
+
+
+                        if(res == 1443) {
+                            std::cout << "N: " << n << std::endl
+                                      << "a: " << a.to_string() << std::endl//only show relevant part of bitset
+                                      << "b: " << b.to_string() << std::endl;
+                            //return;
+                        }
+
+
+                        try {
+                            for(unsigned int i = 0; i < threadNum; ++i)//only calc every threadNum-th calculation
+                                nextNum(b, n);
+                        }
+                        catch(std::runtime_error& ex) {
+                            break;
+                        }
+                    }
+                }
+
+                if(!foundPossibleOnesInB)
+                    break;
+
+                try {
+                    for(unsigned int i = 0; i < threadNum; ++i)
+                        nextNum(a, n);
+                }
+                catch(std::runtime_error& ex) {
+                    break;
+                }
+            }
+
+            if(best > 0)
+                std::cout << "Best in " << n << " with |a|=" << onesInA << ": " << best << std::endl;
+
+            /*for(unsigned long long ib = 1; ib < ia; ++ib) {
+                //std::bitset<64> b = ib;
+
+                size_t absB = countSetBits(ib);
+                unsigned long long absProd = absA * absB;
+
+                if(absProd < 1443)
+                    continue;
+
+                size_t scalarProd = countSetBits(ia & ib);
+                unsigned long long res = absProd - scalarProd * scalarProd;
+
+                if(res == 1443)
+                    std::cout << ia << " " << ib << " - " << res << std::endl;
+            }*/
+        }
+    }
+}
+
 int main(int argc, char const* argv[]) {
+    std::vector<std::thread> thrs;
+
+    for(unsigned int i = 0; i < threadNum; ++i) {
+        thrs.push_back(std::thread([ = ]() {
+            findSolution(i);
+        }));
+    }
+
+    for(unsigned int i = 0; i < threadNum; ++i)
+        thrs[i].join();
+
     /*std::cout << std::bitset<8>(1) << " -> " << std::bitset<8>(nextNum(1, 8)) << std::endl;
     std::cout << std::bitset<8>(3) << " -> " << std::bitset<8>(nextNum(3, 8)) << std::endl;
     std::cout << std::bitset<8>(6) << " -> " << std::bitset<8>(nextNum(6, 8)) << std::endl;
@@ -113,7 +239,7 @@ int main(int argc, char const* argv[]) {
 
     std::cout<<test.to_string()<<std::endl;*/
 
-    std::vector<int> aVec;
+    /*std::vector<int> aVec;
 
     for(int i = 0; i < 66; ++i) {
         if(i >= 25)
@@ -125,99 +251,9 @@ int main(int argc, char const* argv[]) {
     for(int i = 0; i < 66; ++i) {
         if(i < 25 || i >= 47)
             bVec.push_back(i);
-    }
-
-    for(unsigned int n = 38; n <= 1444; ++n) { //dimensions
-        std::cout << n << std::endl;
-
-        unsigned int best = 0;
-
-        // all combinations of numbers of set bits in a and b which are multiplied >= 1443
-        for(unsigned int onesInA = 38; onesInA <= n; ++onesInA) {//38 = notw. min. Dimension
-            std::cout << "onesInA: " << onesInA << std::endl;
-            Bitset a(n);
-            setOnes(onesInA, a);//"smallest" vector with onesInA bits is with all bits set on the right
+    }*/
 
 
-            //we don't have to go through all possible vectors with onesInA ones if we can't find an appropriate onesInB
-            bool foundPossibleOnesInB = false;
-
-            while(true) {//go through all a vectors with onesInA ones
-                std::cout << a.to_string() << "\n";
-
-                //make the "which are multiplied >= 1443" part sure with choosing an appropriate onesInB
-                for(unsigned int onesInB = 1443 / onesInA + (1443 % onesInA == 0 ? 0 : 1); onesInB <= n; ++onesInB) {
-                    if(onesInA * onesInB - (onesInA + onesInB - n) * (onesInA + onesInB - n) < 1443)
-                        continue;
-
-                    std::cout << "onesInB: " << onesInB << std::endl;
-
-
-                    foundPossibleOnesInB = true;//if we don't find an appropriate onesInB, this number of onesInA won't work in any combination -> break
-
-                    Bitset b(n);
-                    setOnes(onesInB, b);
-
-
-                    while(true) {
-                        std::cout << b.to_string() << "\n";
-                        unsigned int absProd = onesInA * onesInB;
-
-                        unsigned int scalarProd = a.CountAnd(b);
-                        unsigned int res = absProd - scalarProd * scalarProd;
-
-                        if(res < 1444)
-                            best = std::max(best, res);
-
-
-                        if(res == 1443) {
-                            std::cout << "N: " << n << std::endl
-                                      << "a: " << a.to_string() << std::endl//only show relevant part of bitset
-                                      << "b: " << b.to_string() << std::endl;
-                            return 0;
-                        }
-
-
-                        try {
-                            nextNum(b, n);
-                        }
-                        catch(std::runtime_error& ex) {
-                            break;
-                        }
-                    }
-                }
-
-                if(!foundPossibleOnesInB)
-                    break;
-
-                try {
-                    nextNum(a, n);
-                }
-                catch(std::runtime_error& ex) {
-                    break;
-                }
-            }
-
-            if(best > 0)
-                std::cout << "Best in " << n << " with |a|=" << onesInA << ": " << best << std::endl;
-
-            /*for(unsigned long long ib = 1; ib < ia; ++ib) {
-                //std::bitset<64> b = ib;
-
-                size_t absB = countSetBits(ib);
-                unsigned long long absProd = absA * absB;
-
-                if(absProd < 1443)
-                    continue;
-
-                size_t scalarProd = countSetBits(ia & ib);
-                unsigned long long res = absProd - scalarProd * scalarProd;
-
-                if(res == 1443)
-                    std::cout << ia << " " << ib << " - " << res << std::endl;
-            }*/
-        }
-    }
 
     return 0;
 }
