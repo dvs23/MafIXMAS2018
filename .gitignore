@@ -15,3 +15,4 @@ Visualizer/node_modules
 Visualizer/static/*.json
 capnp/*.h
 capnp/*.c++
+*.txt

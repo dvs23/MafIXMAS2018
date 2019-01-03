@@ -84,15 +84,23 @@ void findSolution(unsigned int threadID) {
         for(unsigned int onesInA = 38; onesInA <= n; ++onesInA) {//38 = notw. min. Dimension
             std::cout << "onesInA: " << onesInA << std::endl;
             Bitset a(n);
-            setOnes(onesInA, a);//"smallest" vector with onesInA bits is with all bits set on the right
+            //setOnes(onesInA, a);//"smallest" vector with onesInA bits is with all bits set on the right
+            std::vector<int> aVec(onesInA);
+
+            for(int i = 0; i < aVec.size(); i++) //{0,1,2,...
+                aVec[i] = i;
+
 
             try {
-                for(unsigned int i = 0; i < threadID; ++i)//start with different bitsets -> after that every threadNum-th
-                    nextNum(a, n);
+                for(unsigned int i = 0; i < threadID; ++i) //start with different bitsets -> after that every threadNum-th
+                    nextNum(aVec, n);
             }
             catch(std::runtime_error& ex) {
                 continue;
             }
+
+            a.Clear();
+            a.Set(aVec);
 
 
             //we don't have to go through all possible vectors with onesInA ones if we can't find an appropriate onesInB
@@ -112,7 +120,14 @@ void findSolution(unsigned int threadID) {
                     foundPossibleOnesInB = true;//if we don't find an appropriate onesInB, this number of onesInA won't work in any combination -> break
 
                     Bitset b(n);
-                    setOnes(onesInB, b);
+                    //setOnes(onesInB, b);
+                    std::vector<int> bVec(onesInA);
+
+                    for(int i = 0; i < bVec.size(); i++) //{0,1,2,...
+                        bVec[i] = i;
+
+                    b.Clear();
+                    b.Set(bVec);
 
                     while(true) {
                         //std::cout << b.to_string() << "\n";
@@ -134,7 +149,9 @@ void findSolution(unsigned int threadID) {
 
 
                         try {
-                            nextNum(b, n);
+                            nextNum(bVec, n);
+                            b.Clear();
+                            b.Set(bVec);
                         }
                         catch(std::runtime_error& ex) {
                             break;
@@ -147,7 +164,11 @@ void findSolution(unsigned int threadID) {
 
                 try {
                     for(unsigned int i = 0; i < threadNum; ++i)
-                        nextNum(a, n);
+                        nextNum(aVec, n);
+
+                    a.Clear();
+                    a.Set(aVec);
+
                 }
                 catch(std::runtime_error& ex) {
                     break;
@@ -156,22 +177,6 @@ void findSolution(unsigned int threadID) {
 
             if(best > 0)
                 std::cout << "Best in " << n << " with |a|=" << onesInA << ": " << best << std::endl;
-
-            /*for(unsigned long long ib = 1; ib < ia; ++ib) {
-                //std::bitset<64> b = ib;
-
-                size_t absB = countSetBits(ib);
-                unsigned long long absProd = absA * absB;
-
-                if(absProd < 1443)
-                    continue;
-
-                size_t scalarProd = countSetBits(ia & ib);
-                unsigned long long res = absProd - scalarProd * scalarProd;
-
-                if(res == 1443)
-                    std::cout << ia << " " << ib << " - " << res << std::endl;
-            }*/
         }
     }
 }
