@@ -4,6 +4,18 @@
 		"selected_items":
 		[
 			[
+				"fet",
+				"fetch_add\t__int_type __atomic_base<unsigned long long>::fetch_add(__int_type __i)"
+			],
+			[
+				"loop",
+				"loopPointer"
+			],
+			[
+				"s",
+				"size\tsize_type size() const"
+			],
+			[
 				"roun",
 				"roundf\tfloat roundf(float __x)"
 			],
@@ -220,10 +232,6 @@
 				"slaveListGlob\tstd::map<std::string, std::shared_ptr<slaveDataStore> > & slaveListGlob"
 			],
 			[
-				"fet",
-				"fetch_sub\t__int_type __atomic_base<unsigned long long>::fetch_sub(__int_type __i)"
-			],
-			[
 				"_sla",
 				"_slaveListGlobLock\tstd::shared_timed_mutex & _slaveListGlobLock"
 			],
@@ -270,10 +278,6 @@
 			[
 				"jo",
 				"jobParts\tBuilder jobParts"
-			],
-			[
-				"s",
-				"startID\tunsigned int startID"
 			],
 			[
 				"jobPa",
@@ -510,10 +514,6 @@
 			[
 				"seco",
 				"secondID"
-			],
-			[
-				"relevan",
-				"relevantIDsT2\tstd::set<unsigned int> relevantIDsT2"
 			]
 		]
 	},

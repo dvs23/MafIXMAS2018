@@ -3,8 +3,11 @@
 #include <bitset.h>
 #include <cmath>
 #include <thread>
+#include <atomic>
 
 const unsigned int threadNum = 8;
+
+std::atomic<unsigned long long> total(0);
 
 void nextNum(Bitset& bnum, unsigned int ndim) {
     if(ndim > 1444)
@@ -135,6 +138,11 @@ void findSolution(unsigned int threadID) {
 
                         unsigned int scalarProd = a.CountAnd(b);
                         unsigned int res = absProd - scalarProd * scalarProd;
+
+                        unsigned long long t = total.fetch_add(1);
+
+                        if(t % 1000000 == 0)
+                            std::cout << t << std::endl;
 
                         if(res < 1444)
                             best = std::max(best, res);
