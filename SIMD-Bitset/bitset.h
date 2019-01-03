@@ -124,6 +124,8 @@ class Bitset {
     // Set all bits with 0
     void Clear() { memset(bits_, 0, num_bytes_); }
 
+#if SIMD_SIZE == 256
+
     // TODO: Return Bitset where its value to value copying. But for char* it only
     // copies address, not deep copy. So in destructor, we do not free it. We
     // should fix this in the future
@@ -231,6 +233,8 @@ class Bitset {
         return count;
     }
 
+#endif
+
     char* Get() { return bits_; }
 
     bool Get(int bit) {
@@ -254,10 +258,12 @@ class Bitset {
         return ret;
     }
 
+#if SIMD_SIZE == 128
+
     /////////////////////////////////////////////////////////////////////////////
     // SIMD 128 Implementation
     /////////////////////////////////////////////////////////////////////////////
-    Bitset AND128(Bitset& rh_bitset) {
+    Bitset AND(Bitset& rh_bitset) {
         // The SIMD vector
         __m128 A, B, C;
 
@@ -283,7 +289,7 @@ class Bitset {
         return Bitset(result, num_bits_, num_bytes_);
     }
 
-    Bitset OR128(Bitset& rh_bitset) {
+    Bitset OR(Bitset& rh_bitset) {
         // The SIMD vector
         __m128 A, B, C;
 
@@ -307,7 +313,7 @@ class Bitset {
         return Bitset(result, num_bits_, num_bytes_);
     }
 
-    int Count128() {
+    int Count() {
         // Return count
         int count = 0;
 
@@ -328,7 +334,7 @@ class Bitset {
     }
 
     // Return the count for AND operation
-    int CountAnd128(Bitset& rh_bitset) {
+    int CountAnd(Bitset& rh_bitset) {
         // Return count
         int count = 0;
 
@@ -352,6 +358,8 @@ class Bitset {
 
         return count;
     }
+
+#endif
 
   private:
     inline int popcnt128(__m128i n) {
