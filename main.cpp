@@ -5,7 +5,7 @@
 #include <thread>
 #include <atomic>
 
-const unsigned int threadNum = 8;
+const unsigned int threadNum = 24;
 
 std::atomic<unsigned long long> total(0);
 
@@ -141,8 +141,12 @@ void findSolution(unsigned int threadID) {
 
                         unsigned long long t = total.fetch_add(1);
 
-                        if(t % 1000000 == 0)
+                        if(t % 1000000000 == 0) {
                             std::cout << t << std::endl;
+                            std::cout << "res: " << res << std::endl
+                                      << "a: " << a.to_string() << std::endl//only show relevant part of bitset
+                                      << "b: " << b.to_string() << std::endl;
+                        }
 
                         if(res < 1444)
                             best = std::max(best, res);
