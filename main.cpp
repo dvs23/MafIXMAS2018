@@ -37,6 +37,36 @@ void nextNum(Bitset& bnum, unsigned int ndim) {
     bnum.Set(lastOne + 1, true);
 }
 
+void nextNum(std::vector<int>& ones, unsigned int ndim) {
+    if(ndim == 0 || ones.size() == 0)
+        throw std::runtime_error("Invalid parameters!");
+
+    if(ones[0] >= ndim - ones.size())
+        throw std::runtime_error("Maximum reached!");
+
+    unsigned int loopPointer = ones.size() - 1;
+    bool triggerReset = false;
+
+    while(loopPointer > 0 || ones[0] <= ndim - ones.size()) {//break if outest loop has reached the maximum
+        ++ones[loopPointer];
+
+        if(ones[loopPointer] <= ndim - (ones.size() - loopPointer))
+            break;//nothing else to do, loop still valid
+        else {//go up until you find a still valid loop
+            triggerReset = true;//as soon as we found one, we need to set all inner loops to their start value
+
+            if(loopPointer > 0)
+                --loopPointer;
+        }
+    }
+
+    //if reset has been triggered and the max value has not been reached
+    if(triggerReset && ones[0] <= ndim - ones.size()) {//set all following bits back ascending
+        for(unsigned int tLoop = loopPointer; tLoop < ones.size() - 1; ++tLoop)
+            ones[tLoop + 1] = ones[tLoop] + 1;//invalid values should be impossible due to the limits of each loop
+    }
+}
+
 void setOnes(unsigned int numOnes, Bitset& bs) {
     bs.Clear();
 
@@ -201,6 +231,48 @@ int main(int argc, char const* argv[]) {
 
     for(unsigned int i = 0; i < threadNum; ++i)
         thrs[i].join();
+
+    /*
+    std::cout << "NEW: " << std::endl;
+    unsigned int num = 0;
+    std::vector<int> v = {0, 1, 2};
+    Bitset test(5);
+    test.Clear();
+    test.Set(v);
+    std::cout << num++ << ": " << test.to_string() << std::endl;
+
+    while(true) {
+        try {
+            nextNum(v, 5);
+            test.Clear();
+            test.Set(v);
+            std::cout << num++ << ": " << test.to_string() << std::endl;
+        }
+        catch(std::runtime_error& ex) {
+            std::cout << ex.what() << std::endl;
+            break;
+        }
+    }
+
+    std::cout << "OLD:" << std::endl;
+
+    num = 0;
+    std::vector<int> v2 = {0, 1, 2};
+    test.Clear();
+    test.Set(v2);
+    std::cout << num++ << ": " << test.to_string() << std::endl;
+
+    while(true) {
+        try {
+            nextNum(test, 5);
+            std::cout << num++ << ": " << test.to_string() << std::endl;
+        }
+        catch(std::runtime_error& ex) {
+            std::cout << ex.what() << std::endl;
+            break;
+        }
+    }
+     */
 
     /*std::cout << std::bitset<8>(1) << " -> " << std::bitset<8>(nextNum(1, 8)) << std::endl;
     std::cout << std::bitset<8>(3) << " -> " << std::bitset<8>(nextNum(3, 8)) << std::endl;
