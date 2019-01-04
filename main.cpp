@@ -5,12 +5,13 @@
 #include <thread>
 #include <atomic>
 
-const unsigned int threadNum = 24;
+unsigned int threadNum = 8;
+std::chrono::time_point<std::chrono::system_clock> start;
 
 std::atomic<unsigned long long> total(0);
 
 void nextNum(Bitset& bnum, unsigned int ndim) {
-    if(ndim > 1444)
+    if(ndim > 1444)//we don't need to go higher than 1444
         throw std::runtime_error("Dimension too high!");
 
     int lastZero = -1;
@@ -142,8 +143,9 @@ void findSolution(unsigned int threadID) {
                         unsigned long long t = total.fetch_add(1);
 
                         if(t % 1000000000 == 0) {
-                            std::cout << t << std::endl;
-                            std::cout << "res: " << res << std::endl
+                            std::cout << "processed: " << t << std::endl
+                                      << "secs: " << std::chrono::duration<double>(std::chrono::system_clock::now() - start).count() << std::endl
+                                      << "res: " << res << std::endl
                                       << "a: " << a.to_string() << std::endl//only show relevant part of bitset
                                       << "b: " << b.to_string() << std::endl;
                         }
@@ -235,6 +237,11 @@ void findFirstMax() {
 }
 
 int main(int argc, char const* argv[]) {
+    start = std::chrono::system_clock::now();
+
+    if(argc > 1)
+        threadNum = std::atoi(argv[1]);
+
     std::cout << "First possibly working max found at:" << std::endl;
     findFirstMax();
 

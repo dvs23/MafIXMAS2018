@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"thre",
+				"threadNum\tconst unsigned int threadNum"
+			],
+			[
 				"fet",
 				"fetch_add\t__int_type __atomic_base<unsigned long long>::fetch_add(__int_type __i)"
 			],
@@ -22,10 +26,6 @@
 			[
 				"find",
 				"findSolution\tvoid findSolution(unsigned int threadID)"
-			],
-			[
-				"thre",
-				"threadNum"
 			],
 			[
 				"Se",
