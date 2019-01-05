@@ -11,6 +11,7 @@
 \usepackage{cancel}
 \usepackage{listings}
 \usepackage{hyperref}
+\usepackage{algorithm2e}
 
 \newcommand{\limNinf}{\ensuremath{\lim\limits_{n \to \infty}}}
 \newcommand{\sumNinf}{\ensuremath{\sum\limits_{n=1}^\infty}}
@@ -30,7 +31,7 @@
 \setlength{\parindent}{0pt}
 
 \title{MafI1 - Weihnachtsaufgabe}
-\author{208225 David Schmidt}
+\author{208225 David Schmidt, \href{mailto:david3.schmidt@tu-dortmund.de}{david3.schmidt@tu-dortmund.de}}
 \date{\textbf{Gruppe:} 4, Mi. 8-10 bei Simon Demes,\\ \textbf{Abgabe:} 11.01.2019, 14:00 Uhr}
 
 \begin{document}
@@ -204,9 +205,9 @@ Wenn in Dimension 66 einer der beiden Vektoren also 41 Einsen enthält und der a
 Wenn wir uns an die Überlegungen zum maximalen Wert erinnern, bemerken wir schnell, dass wenn das Maximum genau der gesuchte Wert ist, an jeder Position, an der in einem Vektor eine Null steht, im Anderen eine Eins stehen muss. Dies ergibt z.B. folgenden Vektor als eine Lösung für unser Problem:
 
 $(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,\\
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1)^T = \vec a\\
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1)^t = \vec a\\
 (1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,\\
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1)^T = \vec b$
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1)^t = \vec b$
 
 Anders notiert:
 $a_i = 
@@ -236,10 +237,193 @@ Dann gilt:
 Damit ist auch ein Beispiel für ein Bitvektor-Paar in der kleinstmöglichen Dimension gefunden, die Aufgabe also gelöst.
 Natürlich gibt es noch deutlich mehr Beispiele, alleine in Dimension 66 muss lediglich sichergestellt werden, dass alle Nullen im jeweils anderen Vektor auf eine Eins treffen. Das Ergebnis bleibt dann unabhängig von der "Reihenfolge" der Einträge identisch.
 
-Die Suche mit einem "Brute-Force"-Ansatz erweist sich auch mit SIMD und höchstwahrscheinlich auch mit Hardwarebeschleunigung durch eine Grafikkarte als nahezu aussichtslos. Ein Ansatz hierzu ist auf GitHub unter ... zu finden. Dieser verwendet Multithreading sowie mit einigen eigenen Ergänzungen die SIMD-Bitset-Bibliothek von Michael Tieying-Zhang:
+Die Suche mit einem "Brute-Force"-Ansatz erweist sich auch mit SIMD und höchstwahrscheinlich auch mit Hardwarebeschleunigung durch eine Grafikkarte als nahezu aussichtslos. Ein Ansatz hierzu wird nach Ende der Abgabefrist auf GitHub unter dem Konto \url{https://github.com/dvs23/} zu finden sein. Bei Fragen bin ich unter \href{mailto:david3.schmidt@tu-dortmund.de}{david3.schmidt@tu-dortmund.de} erreichbar. Dieser Ansatz verwendet Multithreading sowie mit einigen eigenen Ergänzungen die SIMD-Bitset-Bibliothek von Michael Tieying-Zhang:
 
 \url{https://github.com/Michael-Tieying-Zhang/SIMD-Bitset}
 
+\section{Durchgehen aller möglichen Bitvektoren mit fester Anzahl an Einsen}
 
+Als Startpunkt bietet es sich an, alle Einsen am niedrigwertigen Ende des Bitvektors zu platzieren, also "rechts": $(0,0,0,0,1,1,1)^t$.
+Als Zielwert bietet sich natürlich das Gegenteil an, die Platzierung am höchstwertigen Ende: $(1,1,1,0,0,0,0)^t$. Nun gilt es, alle möglichen Kombinationen zwischen diesen beiden Vektoren durchzugehen.
 
+Hierzu habe ich zwei Möglichkeiten in Betracht gezogen, wobei sich die Zweite im weiteren Verlauf und nach einigem Profiling als deutlich geeigneter herausgestellt hat.
+
+\subsection{"Bits Verschieben"}
+
+Eine einfache, online häufig vorgeschlagene Variante bietet sich mit folgendem Algorithmus:
+
+\begin{algorithm}[H]
+ \KwData{Bitvector, z.B. (0,0,1,1,1,0)}
+ \KwResult{Bitvektor, z.B. (0,1,0,0,1,1)}
+ Finde rechteste Eins, die links von einer Null steht\;
+ \eIf{solche Eins ist vorhanden}{
+    tausche sie mit der Null links von ihr\;
+ }{
+    Abbruch, Zielvektor schon erreicht\;
+ }
+ \If{rechts der getauschten Null sind noch Einsen vorhanden}{
+    verschiebe all diese Einsen ganz nach rechts\;
+ }
+ \caption{"Bits Verschieben"}
+\end{algorithm}
+
+Die Implementierung ist für kurze Vektoren mit etwas um- und unverständlicher "Bitmagie" umsetzbar, was jedoch für längere Vektoren nicht mehr ohne Weiteres funktioniert, da es nicht wirklich einen primitiven Datentyp gibt, der mehr als 64 Bit besitzt. Da wir aber voraussichtlich erst in Dimension 66 tatsächlich anfangen, zu suchen, sind die in einschlägigen Foren vorgeschlagenen Algorithmen eher ungeeignet. Daher hier eine eigene Version mit Schleifen:
+
+\clearpage
+
+\lstset{language=C++}
+
+\begin{lstlisting}[frame=single]
+void nextNum(Bitset& bnum, unsigned int ndim) {
+    if(ndim > 1444 //we don't need to go higher than 1444
+            || bnum.Size() < ndim)//num of bits <= dims?
+        throw std::runtime_error("Dimension too high!");
+
+    int lastZero = -1;//-1 stays if no one/zero found
+    int lastOne = -1;
+
+    //if next position is still valid
+    while(lastZero + 1 < ndim
+            && !bnum.Get(lastZero + 1)) //and is a zero
+        ++lastZero;
+
+    //start searching for a one right after the last zero
+    lastOne = lastZero;
+
+    //protect from consecutive ones
+    while(lastOne + 1 < ndim //if next pos still valid
+            && bnum.Get(lastOne + 1)) //and is a one
+        ++lastOne;
+
+    if(lastOne == -1//if there is no one next to a zero
+            || lastOne + 1 >= ndim)//or one is at the end
+        throw std::runtime_error("Overflow!");
+
+    //how many ones to shift to the end
+    int numOnesToShift = lastOne;
+
+    //if there were zeros before the found one
+    if(lastZero != -1)//subtract them from num ones
+        numOnesToShift =  lastOne - lastZero - 1;
+
+    for(int i = 0; i < lastOne; ++i) {
+        //if: set all ones at the beginning
+        //else: all zeros between the last one
+        //and the beginning 1es
+        if(i < numOnesToShift)
+            bnum.Set(i, true);
+        else
+            bnum.Set(i, false);
+    }
+
+    bnum.Set(lastOne, false);//change last one
+    bnum.Set(lastOne + 1, true);//with zero next to it
+}
+\end{lstlisting}
+
+\subsection{"Reduzierte For-Schleifen"}
+
+\lstset{language=C++}
+
+\begin{lstlisting}[frame=single]
+void nextNum(std::vector<int>& ones, unsigned int ndim) {
+    if(ndim == 0 || ones.size() == 0)
+        throw std::runtime_error("Invalid parameters!");
+    else if(ones[0] >= ndim - ones.size())
+        throw std::runtime_error("Maximum reached!");
+
+    //always start in most inner "loop"
+    unsigned int loopPointer = ones.size() - 1;
+    //reset of all inner variables required?
+    bool triggerReset = false;
+
+    //break if outest loop has reached the maximum
+    while(loopPointer > 0
+            || ones[0] <= ndim - ones.size()) {
+        //default operation: increase index in curr loop
+        ++ones[loopPointer];
+
+        //if limit is not reached yet
+        if(ones[loopPointer]
+                <= ndim - (ones.size() - loopPointer))
+            break;//nothing else to do, loop still valid
+        else {//go up until you find a still valid loop
+            //as soon as we found one, we need to
+            //set all inner loops to their start value
+            triggerReset = true;
+
+            //only decrease if not already in outest loop
+            if(loopPointer > 0)
+                --loopPointer;
+        }
+    }
+
+    //if reset triggered and the max value has not
+    //been reached set all following bits back ascending
+    if(triggerReset && ones[0] <= ndim - ones.size()) {
+        //invalid values should be impossible
+        //due to the limits of each loop
+        for(unsigned int tLoop = loopPointer;
+                tLoop < ones.size() - 1;
+                ++tLoop)
+            ones[tLoop + 1] = ones[tLoop] + 1;
+    }
+}
+\end{lstlisting}
+
+Die Idee hinter Variante 6.2 sind For-Schleifen, deren Schleifenvariablen in einem Array abgespeichert werden. Jede Schleifenvariable repräsentiert eine Eins im Bitvektor. Ist also eine Laufvariable z.B. 4, so wird das 5. Bit im Vektor auf 1 gesetzt (Beginn bei 0). Jede Eins bekommt also eine eigene Schleife. Die Grenzen ergeben sich eindeutig aus der Position:
+
+\begin{lstlisting}[frame=single]
+//ones = Anzahl Einsen
+//ndim = Anzahl Dimensionen
+for(int i = 0; i < ndim - ones; i++) {
+    for(int j = i+1; j < ndim - (ones - 1); j++) {
+        ...
+            for(int m = l+1; m < ndim - 2; m++) {
+                for(int n = m+1; n < ndim - 1; n++) {
+                    //commands
+                }
+            }
+    }
+}
+\end{lstlisting}
+
+Wie man sieht, steht die Eins eines äußeren Loops nie vor der eines inneren Loops, sodass z.B. der äußerste Loop mit "seiner" Eins nie bis ganz an das Ende kommt, sondern nur bis zur Position, die die Anzahl der Einsen vom Ende entfernt ist. Für jede Stufe, die ein Loop weiter innen ist, kommt er eine Position näher (maximal) an das Ende heran. So werden letztendlich alle möglichkeiten abgedeckt, wenn auch in einer anderen Reihenfolge als bei 6.1:
+
+\begin{lstlisting}[frame=single]
+6.2: 
+0: 00111
+1: 01011
+2: 10011
+3: 01101
+4: 10101
+5: 11001
+6: 01110
+7: 10110
+8: 11010
+9: 11100
+Maximum reached!
+6.1:
+0: 00111
+1: 01011
+2: 01101
+3: 01110
+4: 10011
+5: 10101
+6: 10110
+7: 11001
+8: 11010
+9: 11100
+Overflow!
+\end{lstlisting}
+
+Grundsätzlich arbeitet Variante 6.2 damit natürlich schneller, da lediglich einige Zahlen erhöht werden müssen. Da die Variante 6.1 aber direkt auf dem Bitvektor arbeitet, werden praktisch keine unnötigen Schritte gemacht, was diese Variante erstaunlicherweise schneller macht als Variante 6.2. Mit einigen Optimierungen lässt sich jedoch sicherlich auch Version 6.2 auf ein hohes Tempo bringen. Der zeitintensive Teil hier war, dass der Bitvector jedes Mal auf 0 gesetzt und dann alle Einsen neu gesetzt werden müssen. Wenn man nur die minimale Anzahl der Änderungen durchführt, wäre 6.2 sicherlich ebenfalls sehr schnell.
+
+Zum Vergleich, auf meinem Intel i7-4770k schaffte 6.1 mit 8 Threads:
+\begin{lstlisting}[frame=single]
+6.1: ca. 55000000 Bitvektor-Varianten pro Sekunde
+6.2: ca. 45000000 Bitvektor-Varianten pro Sekunde
+\end{lstlisting}
+
+Die Berechnung ist vor allem daher so performant, dass das Zählen der Einsen in den Vektoren sowie die Berechnung des Skalarproduktes (welche einem bitweisen AND mit anschließendem Zählen entspricht) durch die SIMD-Erweiterung AVX2 (Advanced Vector Extensions 2) unterstützt werden, die die parallele Verarbeitung von bis zu 256 Bit ermöglicht.
 \end{document}
