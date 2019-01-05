@@ -56,33 +56,62 @@ void nextNum(Bitset& bnum, unsigned int ndim) {
     bnum.Set(lastOne + 1, true);//with zero next to it
 }
 
+/*
+//ones = Anzahl Einsen
+//ndim = Anzahl Dimensionen
+for(int i = 0; i < ndim - ones; i++) {
+    for(int j = i + 1; j < ndim - (ones - 1); j++) {
+        ...
+
+        for(int m = l + 1; m < ndim - 2; m++) {
+            for(int n = m + 1; n < ndim - 1; n++) {
+                //commands
+            }
+        }
+    }
+}
+ */
 void nextNum(std::vector<int>& ones, unsigned int ndim) {
     if(ndim == 0 || ones.size() == 0)
         throw std::runtime_error("Invalid parameters!");
-
-    if(ones[0] >= ndim - ones.size())
+    else if(ones[0] >= ndim - ones.size())
         throw std::runtime_error("Maximum reached!");
 
+    //always start in most inner "loop"
     unsigned int loopPointer = ones.size() - 1;
+    //reset of all inner variables required?
     bool triggerReset = false;
 
-    while(loopPointer > 0 || ones[0] <= ndim - ones.size()) {//break if outest loop has reached the maximum
+    //break if outest loop has reached the maximum
+    while(loopPointer > 0
+            || ones[0] <= ndim - ones.size()) {
+        //default operation: increase index in curr loop
         ++ones[loopPointer];
 
-        if(ones[loopPointer] <= ndim - (ones.size() - loopPointer))
+        //if limit is not reached yet
+        if(ones[loopPointer]
+                <= ndim - (ones.size() - loopPointer))
             break;//nothing else to do, loop still valid
         else {//go up until you find a still valid loop
-            triggerReset = true;//as soon as we found one, we need to set all inner loops to their start value
+            //as soon as we found one, we need to
+            //set all inner loops to their start value
+            triggerReset = true;
 
+            //only decrease if not already in outest loop
             if(loopPointer > 0)
                 --loopPointer;
         }
     }
 
-    //if reset has been triggered and the max value has not been reached
-    if(triggerReset && ones[0] <= ndim - ones.size()) {//set all following bits back ascending
-        for(unsigned int tLoop = loopPointer; tLoop < ones.size() - 1; ++tLoop)
-            ones[tLoop + 1] = ones[tLoop] + 1;//invalid values should be impossible due to the limits of each loop
+    //if reset triggered and the max value has not
+    //been reached set all following bits back ascending
+    if(triggerReset && ones[0] <= ndim - ones.size()) {
+        //invalid values should be impossible
+        //due to the limits of each loop
+        for(unsigned int tLoop = loopPointer;
+                tLoop < ones.size() - 1;
+                ++tLoop)
+            ones[tLoop + 1] = ones[tLoop] + 1;
     }
 }
 
@@ -103,23 +132,23 @@ void findSolution(unsigned int threadID) {
         for(unsigned int onesInA = 38; onesInA <= n; ++onesInA) {//38 = notw. min. Dimension
             std::cout << "onesInA: " << onesInA << std::endl;
             Bitset a(n);
-            //setOnes(onesInA, a);//"smallest" vector with onesInA bits is with all bits set on the right
-            std::vector<int> aVec(onesInA);
+            setOnes(onesInA, a);//"smallest" vector with onesInA bits is with all bits set on the right
+            /*std::vector<int> aVec(onesInA);
 
             for(int i = 0; i < aVec.size(); i++) //{0,1,2,...
-                aVec[i] = i;
+                aVec[i] = i;*/
 
 
             try {
                 for(unsigned int i = 0; i < threadID; ++i) //start with different bitsets -> after that every threadNum-th
-                    nextNum(aVec, n);
+                    nextNum(a, n);
             }
             catch(std::runtime_error& ex) {
                 continue;
             }
 
-            a.Clear();
-            a.Set(aVec);
+            //a.Clear();
+            //a.Set(aVec);
 
 
             //we don't have to go through all possible vectors with onesInA ones if we can't find an appropriate onesInB
@@ -139,14 +168,14 @@ void findSolution(unsigned int threadID) {
                     foundPossibleOnesInB = true;//if we don't find an appropriate onesInB, this number of onesInA won't work in any combination -> break
 
                     Bitset b(n);
-                    //setOnes(onesInB, b);
-                    std::vector<int> bVec(onesInA);
+                    setOnes(onesInB, b);
+                    /*std::vector<int> bVec(onesInA);
 
                     for(int i = 0; i < bVec.size(); i++) //{0,1,2,...
                         bVec[i] = i;
 
                     b.Clear();
-                    b.Set(bVec);
+                    b.Set(bVec);*/
 
                     while(true) {
                         //std::cout << b.to_string() << "\n";
@@ -178,9 +207,8 @@ void findSolution(unsigned int threadID) {
 
 
                         try {
-                            nextNum(bVec, n);
-                            b.Clear();
-                            b.Set(bVec);
+                            nextNum(b, n);
+                            //b.Set(bVec);
                         }
                         catch(std::runtime_error& ex) {
                             break;
@@ -193,10 +221,10 @@ void findSolution(unsigned int threadID) {
 
                 try {
                     for(unsigned int i = 0; i < threadNum; ++i)
-                        nextNum(aVec, n);
+                        nextNum(a, n);
 
-                    a.Clear();
-                    a.Set(aVec);
+                    //a.Clear();
+                    //a.Set(aVec);
 
                 }
                 catch(std::runtime_error& ex) {
@@ -251,28 +279,47 @@ void findFirstMax() {
     }
 }
 
-int main(int argc, char const* argv[]) {
-    start = std::chrono::system_clock::now();
+void nextNumBenchmarkA(unsigned int ndim, unsigned int ones) {
+    Bitset a(ndim);
+    std::vector<int> aVec(ones);
 
-    if(argc > 1)
-        threadNum = std::atoi(argv[1]);
+    for(int i = 0; i < aVec.size(); i++) //{0,1,2,...
+        aVec[i] = i;
 
-    std::cout << "First possibly working max found at:" << std::endl;
-    findFirstMax();
 
-    std::vector<std::thread> thrs;
+    auto st = std::chrono::system_clock::now();
 
-    for(unsigned int i = 0; i < threadNum; ++i) {
-        thrs.push_back(std::thread([ = ]() {
-            findSolution(i);
-        }));
+    try {
+        while(true) {
+            nextNum(aVec, ndim);
+            a.Clear();//ggf. zum Testen ausschalten
+            a.Set(aVec);//ggf. zum Testen ausschalten
+        }
     }
+    catch(std::runtime_error& ex) {
+        std::cout << "A took secs: " << std::chrono::duration<double>(std::chrono::system_clock::now() - st).count() << std::endl;
+        return;
+    }
+}
 
-    for(unsigned int i = 0; i < threadNum; ++i)
-        thrs[i].join();
+void nextNumBenchmarkB(unsigned int ndim, unsigned int ones) {
+    Bitset b(ndim);
+    setOnes(ones, b);
 
-    /*
-    std::cout << "NEW: " << std::endl;
+    auto st = std::chrono::system_clock::now();
+
+    try {
+        while(true)
+            nextNum(b, ndim);
+    }
+    catch(std::runtime_error& ex) {
+        std::cout << "B took secs: " << std::chrono::duration<double>(std::chrono::system_clock::now() - st).count() << std::endl;
+        return;
+    }
+}
+
+void nextNumTest() {
+    std::cout << "6.2: " << std::endl;
     unsigned int num = 0;
     std::vector<int> v = {0, 1, 2};
     Bitset test(5);
@@ -293,7 +340,7 @@ int main(int argc, char const* argv[]) {
         }
     }
 
-    std::cout << "OLD:" << std::endl;
+    std::cout << "6.1:" << std::endl;
 
     num = 0;
     std::vector<int> v2 = {0, 1, 2};
@@ -311,94 +358,27 @@ int main(int argc, char const* argv[]) {
             break;
         }
     }
-     */
+}
 
-    /*std::cout << std::bitset<8>(1) << " -> " << std::bitset<8>(nextNum(1, 8)) << std::endl;
-    std::cout << std::bitset<8>(3) << " -> " << std::bitset<8>(nextNum(3, 8)) << std::endl;
-    std::cout << std::bitset<8>(6) << " -> " << std::bitset<8>(nextNum(6, 8)) << std::endl;
-    std::cout << std::bitset<8>(11) << " -> " << std::bitset<8>(nextNum(11, 8)) << std::endl;
-    std::cout << std::bitset<8>(23) << " -> " << std::bitset<8>(nextNum(23, 8)) << std::endl;
-    std::cout << std::bitset<8>(24) << " -> " << std::bitset<8>(nextNum(24, 8)) << std::endl;
-    std::cout << std::bitset<8>(44) << " -> " << std::bitset<8>(nextNum(44, 8)) << std::endl;
-    std::cout << std::bitset<8>(46) << " -> " << std::bitset<8>(nextNum(46, 8)) << std::endl;
+int main(int argc, char const* argv[]) {
+    start = std::chrono::system_clock::now();
 
-    try {
-        std::cout << std::bitset<8>(0) << " -> " << std::bitset<8>(nextNum(0, 8)) << std::endl;
-    }
-    catch(std::runtime_error& ex) {
-        std::cout << ex.what() << std::endl;
-    }
+    if(argc > 1)
+        threadNum = std::atoi(argv[1]);
 
-    try {
-        std::cout << std::bitset<8>(255) << " -> " << std::bitset<8>(nextNum(255, 8)) << std::endl;
-    }
-    catch(std::runtime_error& ex) {
-        std::cout << ex.what() << std::endl;
-    }*/
+    std::cout << "First possibly working max found at:" << std::endl;
+    findFirstMax();
 
-    /*unsigned long long last = std::pow(2, 38) - 1;
-    unsigned long long n = 0;
+    std::vector<std::thread> thrs;
 
-    while(true) {
-        try {
-            if((n++) % 10000000 == 0)
-                std::cout << std::bitset<64>(last) << " -> ";
-
-            last = nextNum(last, 64);
-
-            if((n - 1) % 10000000 == 0)
-                std::cout << std::bitset<64>(last) << std::endl;
-        }
-        catch(std::runtime_error& ex) {
-            std::cout << ex.what() << std::endl;
-            break;
-        }
-    }*/
-    /*for(int n = 1; n <= 1444; ++n) {
-        std::cout << n << std::endl;
-
-        for(unsigned long long onesInA = 38; onesInA <= n; ++onesInA) {
-            for(unsigned long long onesInB = 1443 / onesInA + (1443 % onesInA == 0 ? 0 : 1); onesInB <= n; ++onesInB) {
-                unsigned int max = onesInA * onesInB - (onesInA + onesInB - n) * (onesInA + onesInB - n);
-
-                if(max >= 1443) {
-                    std::cout << "A: " << onesInA << " B: " << onesInB << " - " << max << std::endl;
-                    return 0;
-                }
-            }
-        }
-    }*/
-
-    /*Bitset test(66);
-    std::vector<int> v;
-    std::string bad = "000000000000000000000001111111111111111111111111111111111111111010";
-
-    for(size_t i = 0; i < 66; i++) {
-        if(bad[65 - i] == '1')
-            v.push_back(i);
+    for(unsigned int i = 0; i < threadNum; ++i) {
+        thrs.push_back(std::thread([ = ]() {
+            findSolution(i);
+        }));
     }
 
-    test.Set(v);
-
-    nextNum(test, 66);
-
-    std::cout<<test.to_string()<<std::endl;*/
-
-    /*std::vector<int> aVec;
-
-    for(int i = 0; i < 66; ++i) {
-        if(i >= 25)
-            aVec.push_back(i);
-    }
-
-    std::vector<int> bVec;
-
-    for(int i = 0; i < 66; ++i) {
-        if(i < 25 || i >= 47)
-            bVec.push_back(i);
-    }*/
-
-
+    for(unsigned int i = 0; i < threadNum; ++i)
+        thrs[i].join();
 
     return 0;
 }

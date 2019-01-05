@@ -4,6 +4,14 @@
 		"selected_items":
 		[
 			[
+				"ben",
+				"nextNumBenchmarkA\tvoid nextNumBenchmarkA(unsigned int ndim, unsigned int ones)"
+			],
+			[
+				"s",
+				"Size\tint Size()"
+			],
+			[
 				"thre",
 				"threadNum\tconst unsigned int threadNum"
 			],
@@ -14,10 +22,6 @@
 			[
 				"loop",
 				"loopPointer"
-			],
-			[
-				"s",
-				"size\tsize_type size() const"
 			],
 			[
 				"roun",
@@ -510,10 +514,6 @@
 			[
 				"clie",
 				"clientPort"
-			],
-			[
-				"seco",
-				"secondID"
 			]
 		]
 	},
@@ -638,6 +638,8 @@
 	},
 	"file_history":
 	[
+		"/home/dvs23/projects/MafIXMAS2018/SIMD-Bitset/bitset.h",
+		"/home/dvs23/projects/main.cpp",
 		"/home/dvs23/projects/MafIXMAS2018/deb.sh",
 		"/home/dvs23/projects/General/include/WortServer.h",
 		"/home/dvs23/projects/General/src/WortServer.cpp",
@@ -681,7 +683,6 @@
 		"/home/dvs23/projects/bs/A0/prim_extended.c",
 		"/home/dvs23/projects/bs/A0/prim.c",
 		"/usr/include/c++/7.3.1/ext/new_allocator.h",
-		"/home/dvs23/projects/main.cpp",
 		"/usr/include/c++/7.3.1/bits/basic_string.h",
 		"/home/dvs23/projects/General/.gitignore",
 		"/home/dvs23/projects/Group/.gitignore",
@@ -764,8 +765,7 @@
 		"/home/dvs23/projects/miniIMS/miniIMS.js",
 		"/home/dvs23/projects/Group/Visualizer/static/linke.json",
 		"/home/dvs23/Downloads/jquery-ui-1.12.1.custom/package.json",
-		"/home/dvs23/projects/NewsFetch/newsSim.sql",
-		"/home/dvs23/projects/NewsFetch/NewsFetchDB.sql"
+		"/home/dvs23/projects/NewsFetch/newsSim.sql"
 	],
 	"find":
 	{
@@ -803,6 +803,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"memset",
 			"get",
 			"Test",
 			".*?(https://youtu\\.be/.*?)&quot;.*?",
@@ -929,8 +930,7 @@
 			"genT",
 			"genTf",
 			"oftIn",
-			"(.*?) - ([0-9]+?) .*",
-			"([0-9]+) - (.*?) ([0-9]+)"
+			"(.*?) - ([0-9]+?) .*"
 		],
 		"highlight": true,
 		"in_selection": false,
