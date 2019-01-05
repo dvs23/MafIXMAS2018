@@ -11,34 +11,49 @@ std::chrono::time_point<std::chrono::system_clock> start;
 std::atomic<unsigned long long> total(0);
 
 void nextNum(Bitset& bnum, unsigned int ndim) {
-    if(ndim > 1444)//we don't need to go higher than 1444
+    if(ndim > 1444 //we don't need to go higher than 1444
+            || bnum.Size() < ndim)//num of bits <= dims?
         throw std::runtime_error("Dimension too high!");
 
-    int lastZero = -1;
+    int lastZero = -1;//-1 stays if no one/zero found
     int lastOne = -1;
 
-    while(lastZero + 1 < ndim && !bnum.Get(lastZero + 1))
+    //if next position is still valid
+    while(lastZero + 1 < ndim
+            && !bnum.Get(lastZero + 1)) //and is a zero
         ++lastZero;
 
+    //start searching for a one right after the last zero
     lastOne = lastZero;
 
-    while(lastOne + 1 < ndim && bnum.Get(lastOne + 1))
+    //protect from consecutive ones
+    while(lastOne + 1 < ndim //if next pos still valid
+            && bnum.Get(lastOne + 1)) //and is a one
         ++lastOne;
 
-    if(lastOne == -1 || lastOne + 1 >= ndim)
-        throw std::runtime_error("Overflow or no bits set!");
+    if(lastOne == -1//if there is no one next to a zero
+            || lastOne + 1 >= ndim)//or one is at the end
+        throw std::runtime_error("Overflow!");
 
-    int numOnesToShift = (lastZero == -1) ? lastOne : lastOne - lastZero - 1;
+    //how many ones to shift to the end
+    int numOnesToShift = lastOne;
+
+    //if there were zeros before the found one
+    if(lastZero != -1)//subtract them from num ones
+        numOnesToShift =  lastOne - lastZero - 1;
 
     for(int i = 0; i < lastOne; ++i) {
+        //if: set all ones at the beginning
+        //else: all zeros between the last one
+        //and the beginning 1es
         if(i < numOnesToShift)
             bnum.Set(i, true);
         else
             bnum.Set(i, false);
     }
 
-    bnum.Set(lastOne, false);
-    bnum.Set(lastOne + 1, true);
+    bnum.Set(lastOne, false);//change last one
+    bnum.Set(lastOne + 1, true);//with zero next to it
 }
 
 void nextNum(std::vector<int>& ones, unsigned int ndim) {
