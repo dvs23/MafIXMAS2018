@@ -269,7 +269,7 @@ Eine einfache, online häufig vorgeschlagene Variante bietet sich mit folgendem 
  \caption{"Bits Verschieben"}
 \end{algorithm}
 
-Die Implementierung ist für kurze Vektoren mit etwas um- und unverständlicher "Bitmagie" umsetzbar, was jedoch für längere Vektoren nicht mehr ohne Weiteres funktioniert, da es nicht wirklich einen primitiven Datentyp gibt, der mehr als 64 Bit besitzt. Da wir aber voraussichtlich erst in Dimension 66 tatsächlich anfangen, zu suchen, sind die in einschlägigen Foren vorgeschlagenen Algorithmen eher ungeeignet. Daher hier eine eigene Version mit Schleifen:
+Die Implementierung ist für kurze Vektoren mit etwas um- und unverständlicher "Bitmagie" umsetzbar, was jedoch für längere Vektoren nicht mehr ohne Weiteres funktioniert, da es eigentlich keinen primitiven Datentyp gibt, der mehr als 64 Bit besitzt. Da wir aber voraussichtlich erst in Dimension 66 tatsächlich anfangen, zu suchen, sind die in einschlägigen Foren vorgeschlagenen Algorithmen eher ungeeignet. Daher hier eine eigene Version mit Schleifen:
 
 \clearpage
 
@@ -390,7 +390,7 @@ for(int i = 0; i < ndim - ones; i++) {
 }
 \end{lstlisting}
 
-Wie man sieht, steht die Eins eines äußeren Loops nie vor der eines inneren Loops, sodass z.B. der äußerste Loop mit "seiner" Eins nie bis ganz an das Ende kommt, sondern nur bis zur Position, die die Anzahl der Einsen vom Ende entfernt ist. Für jede Stufe, die ein Loop weiter innen ist, kommt er eine Position näher (maximal) an das Ende heran. So werden letztendlich alle möglichkeiten abgedeckt, wenn auch in einer anderen Reihenfolge als bei 6.1:
+Wie man sieht, steht die Eins eines äußeren Loops nie vor der eines inneren Loops, sodass z.B. der äußerste Loop mit "seiner" Eins nie bis ganz an das Ende kommt, sondern nur bis zur Position, die die Anzahl der Einsen vom Ende entfernt ist. Für jede Stufe, die ein Loop weiter innen ist, kommt er eine Position näher (maximal) an das Ende heran. So werden letztendlich alle Möglichkeiten abgedeckt, wenn auch in einer anderen Reihenfolge als bei 6.1:
 
 \begin{lstlisting}[frame=single]
 6.2: 
@@ -427,5 +427,19 @@ Zum Vergleich, auf meinem Intel i7-4770k schaffte 6.1 mit 8 Threads:
 6.2: ca. 45000000 Bitvektor-Varianten pro Sekunde
 \end{lstlisting}
 
-Die Berechnung ist vor allem daher so performant, dass das Zählen der Einsen in den Vektoren sowie die Berechnung des Skalarproduktes (welche einem bitweisen AND mit anschließendem Zählen entspricht) durch die SIMD-Erweiterung AVX2 (Advanced Vector Extensions 2) unterstützt werden, die die parallele Verarbeitung von bis zu 256 Bit ermöglicht.
+Die Berechnung ist vor allem daher so performant, da das Zählen der Einsen in den Vektoren sowie die Berechnung des Skalarproduktes (welche einem bitweisen AND mit anschließendem Zählen entspricht) durch die SIMD-Erweiterung AVX2 (Advanced Vector Extensions 2) unterstützt werden, die die parallele Verarbeitung von bis zu 256 Bit ermöglicht.
+
+\section{Fazit}
+
+Trotz aller Bemühungen ist die Menge der möglichen Lösungen für reines "Brute-Force" einfach zu groß. Selbst nach 1257000000000 durchprobierten Varianten wurde noch keine Lösung gefunden, auch nicht die oben vorgestellten Lösungen. Selbst wenn man sich auf Dimension 66 und 41 Einsen in $\vec a$ und 44 in $\vec b$, so ergeben sich immer noch ca. 
+
+${66 \choose 41} \cdot {66 \choose 44} = 1100523122267397370468819313912434944 \approx 1,1 \cdot 10^{36}$
+
+Möglichkeiten. Bei der oben angegebenen Geschwindigkeit wären das ca. \\
+$6,3 \cdot 10^{20}$ Jahre. Alle Möglichkeiten in Dimension 66 oder gar bis 1444 wollen wir uns gar nicht erst überlegen... 
+
+Hier konnte also eine (theoretisch) sehr rechenaufwändige Suche mit etwas logischem Denken und etwas Computerunterstützung recht schnell lösen. 
+
+\textbf{Dementsprechend wünsche ich ein gutes und friedliches Jahr 2019!} \footnote{Aus zeitlichen Gründen konnte ich nur die wesentlichen Lösungsschritte hier ausführen und nicht alles formal beweisen, weil mir dafür entweder (im Bereich Algorithmen) noch das nötige Fachwissen oder zwischen den Feiertagen und dem 35C3 die Zeit fehlte... Ich hoffe, es war trotzdem eine interessante Lektüre ;)}
+
 \end{document}

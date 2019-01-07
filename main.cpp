@@ -155,10 +155,13 @@ void findSolution(unsigned int threadID) {
             bool foundPossibleOnesInB = false;
 
             while(true) {//go through all a vectors with onesInA ones
-                //std::cout << a.to_string() << "\n";
+
+                unsigned int roundUp = 1443 % onesInA == 0 ? 0 : 1;
 
                 //make the "which are multiplied >= 1443" part sure with choosing an appropriate onesInB
-                for(unsigned int onesInB = 1443 / onesInA + (1443 % onesInA == 0 ? 0 : 1); onesInB <= n; ++onesInB) {
+                for(unsigned int onesInB = 1443 / onesInA + roundUp;
+                        onesInB <= n;
+                        ++onesInB) {
                     if(onesInA * onesInB - (onesInA + onesInB - n) * (onesInA + onesInB - n) < 1443)
                         continue;
 

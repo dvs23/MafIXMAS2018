@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"ro",
+				"roundUp\tunsigned int roundUp"
+			],
+			[
 				"ben",
 				"nextNumBenchmarkA\tvoid nextNumBenchmarkA(unsigned int ndim, unsigned int ones)"
 			],
@@ -510,10 +514,6 @@
 			[
 				"fir",
 				"sync_file_range\tint sync_file_range(int __fd, __off64_t __offset, __off64_t __count, unsigned int __flags)"
-			],
-			[
-				"clie",
-				"clientPort"
 			]
 		]
 	},
@@ -638,6 +638,7 @@
 	},
 	"file_history":
 	[
+		"/home/dvs23/projects/MafIXMAS2018/main.cpp",
 		"/home/dvs23/projects/MafIXMAS2018/SIMD-Bitset/bitset.h",
 		"/home/dvs23/projects/main.cpp",
 		"/home/dvs23/projects/MafIXMAS2018/deb.sh",
@@ -764,8 +765,7 @@
 		"/home/dvs23/projects/Group/Visualizer/GroupClient.js",
 		"/home/dvs23/projects/miniIMS/miniIMS.js",
 		"/home/dvs23/projects/Group/Visualizer/static/linke.json",
-		"/home/dvs23/Downloads/jquery-ui-1.12.1.custom/package.json",
-		"/home/dvs23/projects/NewsFetch/newsSim.sql"
+		"/home/dvs23/Downloads/jquery-ui-1.12.1.custom/package.json"
 	],
 	"find":
 	{
@@ -803,6 +803,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"pow",
 			"memset",
 			"get",
 			"Test",
@@ -929,8 +930,7 @@
 			"garnicht",
 			"genT",
 			"genTf",
-			"oftIn",
-			"(.*?) - ([0-9]+?) .*"
+			"oftIn"
 		],
 		"highlight": true,
 		"in_selection": false,
